@@ -1,4 +1,4 @@
-DRAFT:=masa-operational-considerations
+DRAFT:=idevid-security-considerations
 VERSION:=$(shell ./getver ${DRAFT}.mkd )
 EXAMPLES=
 
