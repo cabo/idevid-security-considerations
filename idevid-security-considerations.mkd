@@ -208,7 +208,7 @@ The downsides of this method to the OEM are: they must be supplied by a trusted 
 There are some operational advantages to keeping the secret seeds around in some form, as the same secret seed could be used for other things.
 There are some significant downsides to keeping that secret seed around.
 
-## Public Key infrastructure for IDevID
+## Public Key infrastructure for IDevIDs
 
 A three-tier PKI infrastructure is appropriate.
 This entails having a root CA created with the key kept offline, and a number of intermediate CAs that have online keys that issue "day-to-day" certificates.
@@ -228,17 +228,19 @@ It is also reasonable to use different intermediate CAs for different product li
 It may also be valuable to split IDevID certificates across intermediate CAs in a round-robin fashion for products with high volumes.
 
 Cycling the intermediate CAs after a period of a few months or so is a quite reasonable strategy.
-The intermediate CAs private key may be destroyed after it signed some number of IDevIDs, and a new key generated.
+The intermediate CAs' private key may be destroyed after it signed some number of IDevIDs, and a new key generated.
 The IDevID certificates have very long (ideally infinite) validity lifetimes for reasons that {{ieee802-1AR}} explains.
-The intermediate CA will have a private key, likely kept online, which is used to sign each generated IDevID. Once the IDevID are created, the private key is no longer needed and can either be destroyed, or taken offline.
+The intermediate CAs will have a private key, likely kept online, which is used to sign each generated IDevID. Once the IDevIDs are created, the private key is no longer needed and can either be destroyed, or taken offline.
 In other CAs, the intermediate CA's private key (or another designated key) is often needed to sign OCSP {{?RFC6960}} or CRLS {{?RFC5280}}.
 As the IDevID process does not in general support revocation, keeping such keys online is not necessary.
 {EDIT NOTE: REVIEW of this NEEDED}
 
 The intermediate CA certificate SHOULD be signed by the root-CA with indefinite (notAfter: 99991231) duration as well.
 
-In all cases the serialNumber embedded in the certificate must be unique across all products produced by the manufacturer.
-This suggests some amount of structure to the serialNumber, such that different intermediate CAs do not need to coordinate when issuing certificates.
+In all cases the product DN-serialNumber embedded in the certificate must be
+unique across all products produced by the manufacturer.
+This suggests some amount of structure to the product DN-serialNumber, such that
+different intermediate CAs do not need to coordinate when issuing certificates.
 
 # Privacy Considerations
 
