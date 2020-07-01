@@ -48,6 +48,18 @@ informative:
     target: "https://en.wikipedia.org/wiki/In-circuit_test#Bed_of_nails_tester"
     date: 2019
 
+  pelionfcu:
+    title: "Factory provisioning overview"
+    target:  https://www.pelion.com/docs/device-management-provision/1.2/introduction/index.html
+    author:
+      org: "ARM Pelion"
+    date: 2020-06-28
+
+  factoringrsa:
+    title: "Factoring RSA keys from certified smart cards: Coppersmith in the wild"
+    target: https://core.ac.uk/download/pdf/204886987.pdf
+    date: 2013-09-16
+
   RambusCryptoManager:
     title: "Qualcomm Licenses Rambus CryptoManager Key and Feature Management Security Solution"
     target: "https://www.rambus.com/qualcomm-licenses-rambus-cryptomanager-key-and-feature-management-security-solution/"
