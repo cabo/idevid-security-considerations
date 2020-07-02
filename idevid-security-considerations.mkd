@@ -152,27 +152,27 @@ These identities are usually in the form of {{ieee802-1AR}} Initial Device Ident
 The identity has two components: a private key that must remain under the strict control of a trusted part of the device, and a public part (the certificate), which (ignoring, for the moment, personal privacy concerns) may be freely disclosed.
 
 It is further not unusual for many devices (particularly smartphones) to also have one or more group identity keys.
-This is used in, for instance, in {{fidotechnote}} to make claims about being a particular model of phone (see {{I-D.richardson-rats-usecases}}).
+This is used in, for instance, in {{fidotechnote}} to make claims about being a particular model of phone (see {{?I-D.richardson-rats-usecases}}).
 The keypair that does this is loaded into large batches of phones for privacy reasons.
 
 The trust anchors are used for a variety of purposes.
 The following uses are specifically called out:
 
-* to validate the signature on a software update (as per {{I-D.ietf-suit-architecture}}).
+* to validate the signature on a software update (as per {{?I-D.ietf-suit-architecture}}).
 * to verify the end of a TLS Server Certificate, such as when setting up an HTTPS connection.
 * to verify the {{RFC8366}} format voucher that provides proof of an ownership change
 
-Device identity keys are used when performing enrollment requests (in {{I-D.ietf-anima-bootstrapping-keyinfra}}, and in some uses of {{I-D.ietf-emu-eap-noob}}.
-The device identity certificate is also used to sign Evidence by an Attesting Environment (see {{I-D.ietf-rats-architecture}}).
+Device identity keys are used when performing enrollment requests (in {{?I-D.ietf-anima-bootstrapping-keyinfra}}, and in some uses of {{?I-D.ietf-emu-eap-noob}}.
+The device identity certificate is also used to sign Evidence by an Attesting Environment (see {{?I-D.ietf-rats-architecture}}).
 
-These security artifacts are used to anchor other chains of information: an EAT Claim as to the version of software/firmware running on a device (XXX and {{I-D.birkholz-suit-coswid-manifest}}),
-an EAT claim about legitimate network activity (via {{I-D.birkholz-rats-mud}}, or embedded in the IDevID
-in {{RFC8520}}).
+These security artifacts are used to anchor other chains of information: an EAT Claim as to the version of software/firmware running on a device (XXX and {{?I-D.birkholz-suit-coswid-manifest}}),
+an EAT claim about legitimate network activity (via {{?I-D.birkholz-rats-mud}}, or embedded in the IDevID
+in {{?RFC8520}}).
 Known software versions lead directly to vendor/distributor signed Software Bill of Materials (SBOM),
-such as those described by {{I-D.ietf-sacm-coswid}} and the NTIA/CISQ/OMG SBOM work underway {{ntiasbom}}.
+such as those described by {{?I-D.ietf-sacm-coswid}} and the NTIA/CISQ/OMG SBOM work underway {{ntiasbom}}.
 
 In order to manage risks and assess vulnerabilities in a Supply Chain, it is necessary to determine a degree of trusthworthiness in each device.
-A device may mislead audit systems as to its provenance, about its software load or even about what kind of device it is. (see {{RFC7168}} for a humourous example).
+A device may mislead audit systems as to its provenance, about its software load or even about what kind of device it is. (see {{?RFC7168}} for a humourous example).
 In order to properly assess he security of a Supply Chain it is necessary to understand the kinds and severity of the threats which a device has been designed to resist.
 To do this, it is necessary to understand the ways in which the different trust anchors and identities are initially provisioned, are protected, and are updated.
 
@@ -193,12 +193,12 @@ The words Trust Anchor are contracted to TrA rather than TA, in order not to con
 
 # Applicability Model
 
-There is a wide variety of devices to which this analysis can apply. (See {{I-D.bormann-lwig-7228bis}})
+There is a wide variety of devices to which this analysis can apply. (See {{?I-D.bormann-lwig-7228bis}})
 This document will use a J-group class C13 as a sample.
 This class is sufficiently large to experience complex issues among multiple CPUs, packages and operating systems, but at the same time, small enough that this class is often deployed in single-purpose IoT-like uses.
 Devices in this class often have Secure Enclaves (such as the "Grapeboard"), and can include silicon manufacturer controlled processors in the boot process (the Raspberry PI boots under control of the GPU).
 
-Almost all larger systems (servers, laptops, desktops) include a Baseboard Management Controller (BMC), which ranges from a M-Group Class 3 MCU, to a J-Group Class 10 CPU (see, for instance {{OpenBMC}} which uses a Linux kernel and system inside the BMC).
+Almost all larger systems (servers, laptops, desktops) include a Baseboard Management Controller (BMC), which ranges from a M-Group Class 3 MCU, to a J-Group Class 10 CPU (see, for instance {{openbmc}} which uses a Linux kernel and system inside the BMC).
 As the BMC usually has complete access to the main CPU's memory, I/O hardware and disk, the boot path security of such a system needs to be understood first as being about the security of the BMC.
 
 ## A reference manufacturing/boot process
