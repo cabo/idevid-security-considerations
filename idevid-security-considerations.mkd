@@ -102,6 +102,38 @@ informative:
       ins: "FIDO Alliance"
       date: "2018-07-19"
 
+  ntiasbom:
+    target: "https://www.it-cisq.org/software-bill-of-materials/index.htm"
+    title: "TOOL-TO-TOOL SOFTWARE BILL OF MATERIALS EXCHANGE"
+    author:
+      ins: "CISQ/Object Management Group"
+      date: "2020-07-01"
+
+  openbmc:
+    target: "https://www.openbmc.org/"
+    title: "Defining a Standard Baseboard Management Controller Firmware Stack"
+    author:
+      ins: "Linux Foundation/OpenBMC Group"
+      date: "2020-07-01"
+
+  JTAG:
+    target: "https://ieeexplore.ieee.org/document/5412866"
+    title: "
+1149.7-2009 - IEEE Standard for Reduced-Pin and Enhanced-Functionality Test Access Port and Boundary-Scan Architecture"
+    author:
+      ins: "IEEE Standard"
+    date: 2009
+    doi: 10.1109/IEEESTD.2010.5412866
+
+  BedOfNails:
+    target: "https://en.wikipedia.org/wiki/In-circuit_test#Bed_of_nails_tester"
+    title: "Bed of nails tester"
+    author:
+      ins: "Wikipedia"
+      date: "2020-07-01"
+
+
+
 --- abstract
 
 This document provides a nomenclature to describe ways in which manufacturers
@@ -133,10 +165,81 @@ The following uses are specifically called out:
 Device identity keys are used when performing enrollment requests (in {{I-D.ietf-anima-bootstrapping-keyinfra}}, and in some uses of {{I-D.ietf-emu-eap-noob}}.
 The device identity certificate is also used to sign Evidence by an Attesting Environment (see {{I-D.ietf-rats-architecture}}).
 
+These security artifacts are used to anchor other chains of information: an EAT Claim as to the version of software/firmware running on a device (XXX and {{I-D.birkholz-suit-coswid-manifest}}),
+an EAT claim about legitimate network activity (via {{I-D.birkholz-rats-mud}}, or embedded in the IDevID
+in {{RFC8520}}).
+Known software versions lead directly to vendor/distributor signed Software Bill of Materials (SBOM),
+such as those described by {{I-D.ietf-sacm-coswid}} and the NTIA/CISQ/OMG SBOM work underway {{ntiasbom}}.
+
+In order to manage risks and assess vulnerabilities in a Supply Chain, it is necessary to determine a degree of trusthworthiness in each device.
+A device may mislead audit systems as to its provenance, about its software load or even about what kind of device it is. (see {{RFC7168}} for a humourous example).
+In order to properly assess he security of a Supply Chain it is necessary to understand the kinds and severity of the threats which a device has been designed to resist.
+To do this, it is necessary to understand the ways in which the different trust anchors and identities are initially provisioned, are protected, and are updated.
+
+To do this, this document details the different trust anchors (TrA) and identities (IDs) found in typical devices.
+The privacy and integrity of the TAs and IDs is often provided by a different, superior artifacts.
+This relationship is examined.
+
+While many might desire to assign numerical values to different mitigation techniques in order to be able to rank them,  this document does not attempt to do, as there are too many other (mostly human) factors that would come into play.
+Such an effort is more properly in the purvue of a formal ISO9001 process such as ISO14001.
+
+## Terminology
+
+This document is not a standards track document, and it does not make use of formal requirements language.
+
+This section will be expanded to include needed terminology as required.
+
+The words Trust Anchor are contracted to TrA rather than TA, in order not to confuse with {{I-D.ietf-teep-architecture}}'s "Trusted Application".
+
+# Applicability Model
+
+There is a wide variety of devices to which this analysis can apply. (See {{I-D.bormann-lwig-7228bis}})
+This document will use a J-group class C13 as a sample.
+This class is sufficiently large to experience complex issues among multiple CPUs, packages and operating systems, but at the same time, small enough that this class is often deployed in single-purpose IoT-like uses.
+Devices in this class often have Secure Enclaves (such as the "Grapeboard"), and can include silicon manufacturer controlled processors in the boot process (the Raspberry PI boots under control of the GPU).
+
+Almost all larger systems (servers, laptops, desktops) include a Baseboard Management Controller (BMC), which ranges from a M-Group Class 3 MCU, to a J-Group Class 10 CPU (see, for instance {{OpenBMC}} which uses a Linux kernel and system inside the BMC).
+As the BMC usually has complete access to the main CPU's memory, I/O hardware and disk, the boot path security of such a system needs to be understood first as being about the security of the BMC.
+
+## A reference manufacturing/boot process
+
+In order to provide for immutability and privacy of the critical TANs and IDs, many CPU manufacturers will provide for some kind of private memory area which is only accessible when the CPU is in certain priviledged states.
+See the Terminology section of {{I-D.ietf-teep-architecture}}, notably TEE, REE, and TAM, and also section 4, Architecture.
+
+The private memory that is important is usually non-volatile and rather small.
+It may be located inside the CPU silicon die, or it may be located externally.
+If the memory is external, then it is usually encrypted by a hardware mechanism on the CPU, with only the key kept inside the CPU.
+
+This entire mechanism may be external to the CPU in the form of a hardware-TPM module, or it may be entirely internal to the CPU in the form of a firmware-TPM.
+It may use a custom interface to the rest of the system, or it may implement the TPM 1.2 or TPM 2.0 specifications.
+Those details are important to performing a proper evaluation, but do not matter that to this model.
+
+During the manufacturing process, once the components have been soldered to the board, the system is usually put through a system-level test.
+This is often done on as a "bed-of-nails" test {{BedOfNails}}, where the board has key points attached mechanically to a test system.
+A {{JTAG}} process tests the System Under Test, and then initializes some firmware into the still empty flash storage.
+It is now common for a factory test image to be loaded first: this image will include code to initialize the private memory key described above, and will include a first-stage bootloader and some kind of primitive Trusted Application Manager (TAM).
+Embedded in the stage one bootloader will be a TrA that is able to verify the second-stage bootloader image.
+
+After the system has undergone testing, the factory test image is erased, leaving the first-stage bootloader.
+One or more second-stage bootloader images is installed.
+The production image may be installed at that time, or if the second-stage bootloader is able to install it over the network, it may be done that way instead.
+
+There are many variations of the above process.
+There process may be entirely automated, or it may be entirely driven by humans working in the factory.
+Or a combination of the above.
+These steps may all occur on an access-controlled assembly line, or the system boards may be shipped from one place to another (maybe another country) before undergoing testing.
+
+Some systems are intended to be shipped in a tamper-proof state, but it is usually not desireable that bed-of-nails testing be possible without tampering, so the initialization process is usually done prior to rendering the system tamper-proof.
+
+Quality control testing may be done prior to as well as after the application of tamper-proofing, as systems which do not pass inspection may be reworked to fix flaws, and this should ideally be impossible once the system has been made tamper-proof.
+
+# Types of Trust Anchors
+
+## Types of identities
 
 
 
-# BRSKI background
+# Manufacturer installed IDevID certificates
 
 {{I-D.ietf-anima-bootstrapping-keyinfra}} introduces a mechanism for
 new devices (called pledges) to be onboarded into a network without
