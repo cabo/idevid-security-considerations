@@ -1,7 +1,7 @@
 ---
-title: Security and Operational considerations for manufacturer generated IDevID
+title: Security and Operational considerations for manufacturer installed keys and anchors
 abbrev: IDevID Considerations
-docname: draft-richardson-secdispatch-idevid-considerations-00
+docname: draft-richardson-secdispatch-idevid-considerations-01
 
 ipr: trust200902
 area: Internet
@@ -95,20 +95,48 @@ informative:
       org: "NIST"
     date: 2016-01-01
 
+  fidotechnote:
+    target: "https://fidoalliance.org/fido-technotes-the-truth-about-attestation/"
+    title: "FIDO TechNotes: The Truth about Attestation"
+    author:
+      ins: "FIDO Alliance"
+      date: "2018-07-19"
+
 --- abstract
 
-This document provides a number of operational modes that a
-manufacturer of devices that include IEEE 802.1AR IDevID certificates may
-choose from.
-Different ways of generating and signing the needed keypairs are detailed,
-and the security tradeoffs of each method are considered.
-This document provides a nomenclature for each mode.
-
-IDevID certificates are used in ANIMA's BRSKI Manufacturer Authorized Signing Authority (MASA) process.
+This document provides a nomenclature to describe ways in which manufacturers
+secure private keys and public trust anchors in devices.
 
 --- middle
 
 # Introduction
+
+An increasing number of protocols derive a significant part of their security by using trust anchors that are installed by manufacturers.
+Access to these trust anchors does not usually cause a problem, but changing them in any way does.
+This includes adding, replacing or deleting anchors.
+
+Additionally, many protocols leverage manufacturer installed identities.
+These identities are usually in the form of {{ieee802-1AR}} Initial Device Identity certificates (IDevID).
+The identity has two components: a private key that must remain under the strict control of a trusted part of the device, and a public part (the certificate), which (ignoring, for the moment, personal privacy concerns) may be freely disclosed.
+
+It is further not unusual for many devices (particularly smartphones) to also have one or more group identity keys.
+This is used in, for instance, in {{fidotechnote}} to make claims about being a particular model of phone (see {{I-D.richardson-rats-usecases}}).
+The keypair that does this is loaded into large batches of phones for privacy reasons.
+
+The trust anchors are used for a variety of purposes.
+The following uses are specifically called out:
+
+* to validate the signature on a software update (as per {{I-D.ietf-suit-architecture}}).
+* to verify the end of a TLS Server Certificate, such as when setting up an HTTPS connection.
+* to verify the {{RFC8366}} format voucher that provides proof of an ownership change
+
+Device identity keys are used when performing enrollment requests (in {{I-D.ietf-anima-bootstrapping-keyinfra}}, and in some uses of {{I-D.ietf-emu-eap-noob}}.
+The device identity certificate is also used to sign Evidence by an Attesting Environment (see {{I-D.ietf-rats-architecture}}).
+
+
+
+
+# BRSKI background
 
 {{I-D.ietf-anima-bootstrapping-keyinfra}} introduces a mechanism for
 new devices (called pledges) to be onboarded into a network without
