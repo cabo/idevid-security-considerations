@@ -40,10 +40,20 @@ normative:
 informative:
   I-D.richardson-anima-masa-considerations:
   I-D.ietf-anima-bootstrapping-keyinfra: BRSKI
+  RFC5011:
   RFC8366:
   RFC7030:
   I-D.gutmann-scep: SCEP
   RFC4210: CMP
+  _3GPP.51.011:
+    title: "Specification of the Subscriber Identity Module - Mobile Equipment (SIM-ME) interface"
+    author:
+      org: 3GPP
+    date: 2005-06-15
+    target: "http://www.3gpp.org/ftp/Specs/html-info/51011.htm"
+    seriesInfo:
+      name: 3GPP TS 51.011 4.15.0
+
   BedOfNails:
     title: "In-circuit test"
     author:
@@ -121,21 +131,18 @@ informative:
 
   JTAG:
     target: "https://ieeexplore.ieee.org/document/5412866"
-    title: "
-1149.7-2009 - IEEE Standard for Reduced-Pin and Enhanced-Functionality Test Access Port and Boundary-Scan Architecture"
+    title: "1149.7-2009 - IEEE Standard for Reduced-Pin and Enhanced-Functionality Test Access Port and Boundary-Scan Architecture"
     author:
       ins: "IEEE Standard"
     date: 2009
     doi: 10.1109/IEEESTD.2010.5412866
 
   rootkeyrollover:
-    target: "https://www.icann.org/en/system/files/files/proposal-future-rz-ksk-rollovers-01nov19-en.pdf
+    target: "https://www.icann.org/en/system/files/files/proposal-future-rz-ksk-rollovers-01nov19-en.pdf"
     title: "Proposal for Future Root Zone KSK Rollovers"
     author:
       ins: "ICANN"
     date: 2019
-
-  3GPP.51.011:
 
   BedOfNails:
     target: "https://en.wikipedia.org/wiki/In-circuit_test#Bed_of_nails_tester"
@@ -169,7 +176,7 @@ These identities are usually in the form of {{ieee802-1AR}} Initial Device Ident
 The identity has two components: a private key that must remain under the strict control of a trusted part of the device, and a public part (the certificate), which (ignoring, for the moment, personal privacy concerns) may be freely disclosed.
 
 There also situations where identities which are tied up in the provision of symmetric shared secret.
-A common example is the SIM card ({{3GPP.51.011}}), which now comes as a virtual SIM, but which is usually not provisioned at the factory.
+A common example is the SIM card ({{_3GPP.51.011}}), which now comes as a virtual SIM, but which is usually not provisioned at the factory.
 The provision of an initial, per-device default password also falls into the category of symmetric shared secret.
 
 It is further not unusual for many devices (particularly smartphones) to also have one or more group identity keys.
@@ -465,7 +472,7 @@ As in the previous case, the transfer may be done via physical interfaces such a
 
 There is also the possibility of having a _factory-generated_ / _network-transfered_
 key.
-There is a support for "server-generated" keys in {{RFC7030}}, {{SCEP}}, and {{CMP}}.
+There is a support for "server-generated" keys in {{RFC7030}}, {{-SCEP}}, and {{-CMP}}.
 All methods strongly recommend encrypting the private key for transfer.
 This is difficult to comply with as there is not yet any private key material in the device, so in many cases it will not be possible to encrypt the private key.
 
