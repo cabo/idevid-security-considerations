@@ -59,7 +59,7 @@ informative:
     author:
       org: "Wikipedia"
     target: "https://en.wikipedia.org/wiki/In-circuit_test#Bed_of_nails_tester"
-    date: 2019
+    date: 2019-01-01
 
   pelionfcu:
     title: "Factory provisioning overview"
@@ -113,7 +113,7 @@ informative:
     title: "FIDO TechNotes: The Truth about Attestation"
     author:
       ins: "FIDO Alliance"
-      date: "2018-07-19"
+    date: "2018-07-19"
 
   ntiasbom:
     target: "https://www.ntia.doc.gov/SoftwareTransparency"
@@ -127,14 +127,14 @@ informative:
     title: "TOOL-TO-TOOL SOFTWARE BILL OF MATERIALS EXCHANGE"
     author:
       ins: "CISQ/Object Management Group"
-      date: "2020-07-01"
+    date: "2020-07-01"
 
   openbmc:
     target: "https://www.openbmc.org/"
     title: "Defining a Standard Baseboard Management Controller Firmware Stack"
     author:
       ins: "Linux Foundation/OpenBMC Group"
-      date: "2020-07-01"
+    date: "2020-07-01"
 
   JTAG:
     target: "https://ieeexplore.ieee.org/document/5412866"
@@ -156,7 +156,7 @@ informative:
     title: "Bed of nails tester"
     author:
       ins: "Wikipedia"
-      date: "2020-07-01"
+    date: "2020-07-01"
 
   CABFORUM:
     target: "https://cabforum.org/wp-content/uploads/BRv1.2.2.pdf"
