@@ -576,7 +576,7 @@ This document makes no IANA requests.
 
 # Acknowledgements
 
-Hello.
+Robert Martin of MITRE provides some guidance about citing the SBOM efforts.
 
 # Changelog
 
