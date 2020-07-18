@@ -1,15 +1,12 @@
-# IDevID security considerations for MASA
+# IDevID Security Considerations for devices
 
-The ANIMA WG Bootstrapping Remote Secure Key Infrastructure (BRSKI)
-protocol involves three parties: Pledge (device), Registrar and
-Manufacturer Authorized Signing Authority (MASA).
+A number of protocols require trust anchors to be built by
+manufacturers.
+Many additionally require manufacturer installed certificiates (or identities).
 
-The ANIMA WG is at http://datatracker.ietf.org/wg/anima
-but this document has wider appeal and does not yet have a home.
+This document is about security considerations for installation and deployment of these artifacts.
 
-This repository is an an active IETF internet draft on operating
-the manufacturer hosted IDevID mechanism that is required for
-correct BRSKI operation.
+Users of these artifacts includes the ANIMA WG's Bootstrapping Remote Secure Key Infrastructure (BRSKI).
 
 
 
