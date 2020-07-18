@@ -164,6 +164,8 @@ informative:
 This document provides a nomenclature to describe ways in which manufacturers
 secure private keys and public trust anchors in devices.
 
+[RFCEDITOR: please remove] This work is occuring in https://github.com/mcr/idevid-security-considerations
+
 --- middle
 
 # Introduction
