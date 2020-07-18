@@ -1,7 +1,7 @@
 ---
 title: Security and Operational considerations for manufacturer installed keys and anchors
 abbrev: IDevID Considerations
-docname: draft-richardson-secdispatch-idevid-considerations-01
+docname: draft-richardson-secdispatch-idevid-considerations-02
 
 ipr: trust200902
 area: Internet
@@ -116,6 +116,13 @@ informative:
       date: "2018-07-19"
 
   ntiasbom:
+    target: "https://www.ntia.doc.gov/SoftwareTransparency"
+    title: "NTIA Software Compoment Transparency"
+    author:
+      ins: "NTIA"
+      date: "2020-07-01"
+
+  cisqsbom:
     target: "https://www.it-cisq.org/software-bill-of-materials/index.htm"
     title: "TOOL-TO-TOOL SOFTWARE BILL OF MATERIALS EXCHANGE"
     author:
@@ -197,7 +204,7 @@ These security artifacts are used to anchor other chains of information: an EAT 
 an EAT claim about legitimate network activity (via {{?I-D.birkholz-rats-mud}}, or embedded in the IDevID
 in {{?RFC8520}}).
 Known software versions lead directly to vendor/distributor signed Software Bill of Materials (SBOM),
-such as those described by {{?I-D.ietf-sacm-coswid}} and the NTIA/CISQ/OMG SBOM work underway {{ntiasbom}}.
+such as those described by {{?I-D.ietf-sacm-coswid}} and the NTIA/SBOM work {{ntiasbom}} and CISQ/OMG SBOM work underway {{cisqsbom}}.
 
 In order to manage risks and assess vulnerabilities in a Supply Chain, it is necessary to determine a degree of trusthworthiness in each device.
 A device may mislead audit systems as to its provenance, about its software load or even about what kind of device it is. (see {{?RFC7168}} for a humourous example).
