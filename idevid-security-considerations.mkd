@@ -8,6 +8,7 @@ area: Internet
 wg: anima Working Group
 kw: Internet-Draft
 cat: std
+stand_alone: true
 
 pi:
   toc: yes
@@ -45,14 +46,7 @@ informative:
   RFC7030:
   I-D.gutmann-scep: SCEP
   RFC4210: CMP
-  _3GPP.51.011:
-    title: "Specification of the Subscriber Identity Module - Mobile Equipment (SIM-ME) interface"
-    author:
-      org: 3GPP
-    date: 2005-06-15
-    target: "http://www.3gpp.org/ftp/Specs/html-info/51011.htm"
-    seriesInfo:
-      name: 3GPP TS 51.011 4.15.0
+  3GPP.51.011:
 
   BedOfNails:
     title: "In-circuit test"
@@ -183,7 +177,7 @@ These identities are usually in the form of {{ieee802-1AR}} Initial Device Ident
 The identity has two components: a private key that must remain under the strict control of a trusted part of the device, and a public part (the certificate), which (ignoring, for the moment, personal privacy concerns) may be freely disclosed.
 
 There also situations where identities which are tied up in the provision of symmetric shared secret.
-A common example is the SIM card ({{_3GPP.51.011}}), which now comes as a virtual SIM, but which is usually not provisioned at the factory.
+A common example is the SIM card ({{3GPP.51.011}}), which now comes as a virtual SIM, but which is usually not provisioned at the factory.
 The provision of an initial, per-device default password also falls into the category of symmetric shared secret.
 
 It is further not unusual for many devices (particularly smartphones) to also have one or more group identity keys.
