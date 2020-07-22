@@ -21,10 +21,10 @@ author:
   org: Sandelman Software Works
   email: mcr+ietf@sandelman.ca
 
-- ins: W. Pan
-  name: Wei Pan
-  org: Huawei Technologies
-  email: william.panwei@huawei.com
+- ins: J. Yang
+  name: Jie Yang
+  org: Huawei Technologies Co., Ltd.
+  email: jay.yang@huawei.com
 
 
 normative:
@@ -208,7 +208,7 @@ such as those described by {{?I-D.ietf-sacm-coswid}} and the NTIA/SBOM work {{nt
 
 In order to manage risks and assess vulnerabilities in a Supply Chain, it is necessary to determine a degree of trusthworthiness in each device.
 A device may mislead audit systems as to its provenance, about its software load or even about what kind of device it is. (see {{?RFC7168}} for a humourous example).
-In order to properly assess he security of a Supply Chain it is necessary to understand the kinds and severity of the threats which a device has been designed to resist.
+In order to properly assess the security of a Supply Chain it is necessary to understand the kinds and severity of the threats which a device has been designed to resist.
 To do this, it is necessary to understand the ways in which the different trust anchors and identities are initially provisioned, are protected, and are updated.
 
 To do this, this document details the different trust anchors (TrA) and identities (IDs) found in typical devices.
@@ -440,7 +440,7 @@ This transmission must be done in an integral manner, and must be securely assoc
 The serial number goes into the certificate, and the resulting certificate needs to be loaded into the manufacturer's asset database.
 This asset database needs to be shared with the MASA.
 
-One way to do the transmission is during a manufacturing during a Bed of Nails (see {{BedOfNails}}) or Boundary Scan.
+One way to do the transmission is manufacturing during a Bed of Nails (see {{BedOfNails}}) or Boundary Scan.
 When done via a physical connection like this, then this is referred to as a
 _device-generated_ / _mechanically-transfered_ .
 
