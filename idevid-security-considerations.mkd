@@ -440,7 +440,7 @@ This transmission must be done in an integral manner, and must be securely assoc
 The serial number goes into the certificate, and the resulting certificate needs to be loaded into the manufacturer's asset database.
 This asset database needs to be shared with the MASA.
 
-One way to do the transmission is manufacturing during a Bed of Nails (see {{BedOfNails}}) or Boundary Scan.
+One way to do the transmission is during a factory Bed of Nails test (see {{BedOfNails}}) or Boundary Scan.
 When done via a physical connection like this, then this is referred to as a
 _device-generated_ / _mechanically-transfered_ .
 
@@ -586,4 +586,3 @@ Hello.
 
 
 --- back
-
