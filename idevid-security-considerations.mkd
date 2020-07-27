@@ -95,6 +95,12 @@ informative:
        org: "Digi-Sign"
      date: "2020-04-04"
 
+  shamir79:
+    title: "How to share a secret."
+    author: "Adi Shamirt"
+    date: "1979"
+    target: "https://www.cs.jhu.edu/~sdoshi/crypto/papers/shamirturing.pdf"
+
   nistsp800-57:
     title: "SP 800-57 Part 1 Rev. 4 Recommendation for Key Management, Part 1: General"
     target: "https://csrc.nist.gov/publications/detail/sp/800-57-part-1/rev-4/final"
@@ -507,44 +513,117 @@ The downsides of this method to the OEM are: they must be supplied by a trusted 
 There are some operational advantages to keeping the secret seeds around in some form, as the same secret seed could be used for other things.
 There are some significant downsides to keeping that secret seed around.
 
-# Public Key infrastructure for IDevIDs
+# Public Key Infrastructures (PKI)
 
-A three-tier PKI infrastructure is appropriate.
-This entails having a root CA created with the key kept offline, and a number of intermediate CAs that have online keys that issue "day-to-day" certificates.
+{{RFC5280}} describes the format for certificates, and numerous mechanisms
+for doing enrollment have been defined (including: EST: {{RFC7030}}, CMP: {{RFC4210}},
+SCEP {{I-D.gutmann-scep}}).
 
-The root private key should be kept offline, quite probably in a Hardware Security Module if financially feasible.
-If not, then it should be secret-split across seven to nine people, with a threshold of four to five people.
-The split secrets should be kept in geographically diverse places if the manufacturer has operations in multiple places.
+{{RFC5280}} provides mechanisms to deal with multi-level certification
+authorities, but it is not always clear what operating rules apply.
+
+PKIs can suffer two kinds of failures:
+1. disclosure of a private key.
+2. loss of a private key.
+
+A PKI which discloses one or more private certification authority keys is no
+longer secure.
+An attacker can create new identities, and forge certificates connecting
+existing identities to attacker controlled public/private keypairs.
+This can permit the attacker to impersonate the specific device.
+
+If the PKI uses Certificate Revocation Lists (CRL)s, then an attacker can
+also revoke existing identities.
+
+In the other direction, a PKI which loses access to a private key can no
+longer function.
+Existing identities may continue to function, unless CRLs or OCSP is in use, in
+which case, the inability to sign a fresh CRL or OCSP response will result in
+all identities becoming invalid.
+
+This section details some nomenclature about the structure of certification
+authorities.
+
+## Number of levels of certification authorities
+
+The certification authority (CA) starts with a Trust Anchor (TA).
+This is counted as the zeroth level of the authority.
+
+In the degenerate case of a self-signed certificate, then this a level zero PKI.
+
+{::include self-signed.txt}
+
+The Trust Anchor signs one or more certificates.
+When this first level authority trusts only End-Entity (EE) certificates,
+then this is a level one PKI.
+
+{::include one-level.txt}
+
+When this first level authority signs intermediate certification authorities,
+and those certification authorities sign End-Entity certificates, then
+this is a level two PKI.
+
+{::include two-level.txt}
+
+In general, when arranged as a tree, with the End-Entity certificates at the
+bottom, and the Trust Anchor at the top, then the level is where the deepest EE
+certificates are, counting from zero.
+
+It is quite common to have a two-level PKI, where the root of the CA is
+stored in a Hardware Security Module, while the level one intermediate CA is
+available online.
+
+## Protection of CA private keys
+
+The private key for the certification authorities must be protected from
+disclosure.
+The strongest protection is afforded by keeping them in a offline device,
+passing Certificate Signing Requests (CSR)s to the offline device by human
+process.
+
 For examples of extreme measures, see {{kskceremony}}.
 There is however a wide spectrum of needs, as exampled in {{rootkeyceremony}}.
 The SAS70 audit standard is usually used as a basis for the Ceremony, see {{keyceremony2}}.
 
-Ongoing access to the root-CA is important, but not as critical as access to the MASA key.
+This is inconvenient, and may involve latencies of days, possibly even weeks
+to months if the offline device is kept in a locked environment that requires
+multiple keys to be present.
 
-The root CA is then used to sign a number of intermediate entities.
-If manufacturing occurs in multiple factories, then an intermediate CA for each factory is appropriate.
-It is also reasonable to use different intermediate CAs for different product lines.
-It may also be valuable to split IDevID certificates across intermediate CAs in a round-robin fashion for products with high volumes.
+There is therefore a tension between protection and convenience.
+This is often accomplished by having some levels of the PKI be offline, and
+some levels of the PKI be online.
 
-Cycling the intermediate CAs after a period of a few months or so is a quite reasonable strategy.
-The intermediate CAs' private key may be destroyed after it signed some number of IDevIDs, and a new key generated.
-The IDevID certificates have very long (ideally infinite) validity lifetimes for reasons that {{ieee802-1AR}} explains.
-The intermediate CAs will have a private key, likely kept online, which is used to sign each generated IDevID. Once the IDevIDs are created, the private key is no longer needed and can either be destroyed, or taken offline.
-In other CAs, the intermediate CA's private key (or another designated key) is often needed to sign OCSP {{?RFC6960}} or CRLS {{?RFC5280}}.
-As the IDevID process does not in general support revocation, keeping such keys online is not necessary.
-{EDIT NOTE: REVIEW of this NEEDED}
+There is usually a need to maintain backup copies of the critical keys.
+It is often appropriate to use secret splitting technology such as Shamir
+Secret Sharing among a number of parties {{shamir79}}
+This mechanism can be setup such that some threshold k (less than the total
+n) of shares are needed in order to recover the secret.
 
-The intermediate CA certificate SHOULD be signed by the root-CA with indefinite (notAfter: 99991231) duration as well.
+## Supporting provisioned anchors in devices
 
-In all cases the product DN-serialNumber embedded in the certificate must be
-unique across all products produced by the manufacturer.
-This suggests some amount of structure to the product DN-serialNumber, such that
-different intermediate CAs do not need to coordinate when issuing certificates.
+IDevID-type Identity (or Birth) Certificates which are provisioned into
+devices need to be signed by a certification authority maintained by the manufacturer.
+The manufacturer needs to maintain availability of this PKI.
+
+Trust anchors which are provisioned in the devices will have corresponding
+private keys maintained by the manufacturer.
+The trust anchors will often anchor a PKI which is going to be used for a
+particular purpose.
+There will be End-Entity (EE) certificates of this PKI which will be used to sign
+particular artifacts (such as software updates), or communications protocols
+(such as TLS connections).
+The private key associated with these EE certificates are not stored in the
+device, but are maintained by the manufacturer.
+These need even more care than the private keys stored in the devices, as
+compromise of the software update key compromises all of the devices, not
+just a single device.
 
 # Evaluation Questions
 
 This section recaps the set of questions that may need to be answered.
 This document does not assign valuation to the answers.
+
+## Integrity and Privacy of on-device data
 
 initial-enclave-location :
 : Is the location of the initial software trust anchor internal to the CPU package?
@@ -559,8 +638,56 @@ first-stage-initialization :
 : The number of people involved in the first stage initialization. An entirely automated system would have a number zero.  A factory with three 8 hour shifts might have a number that is a multiple of three.  A system with humans involved may be subject to bribery attacks, while a system with no humans may be subject to attacks on the system which are hard to notice.
 
 first-second-stage-gap :
-: If a board is initialized with a first-stage bootloader in one location (factory), and then shipped to another location, there may situations where the device can not be locked down until the second step.
+: If a board is initialized with a first-stage bootloader in one location
+(factory), and then shipped to another location, there may situations where
+the device can not be locked down until the second step.
 
+## Integrity and Privacy of device identify infrastructure
+
+For IDevID provisioning, which includes a private key and matching
+certificate installed into the device, the associated public key
+infrastructure that anchors this identity must be maintained by the
+manufacturer.
+
+identity-pki-level :
+: how deep are the IDevID certificates that are issued?
+
+identity-time-limits-per-intermediate :
+: how long is each intermediate CA maintained before before a new
+intermediate CA key is generated?  There may be no time limit, only a device
+count limit.
+
+identity-number-per-intermediate :
+: how many identities are signed by a particular intermediate CA before it is
+retired?  There may be no numeric limit, only a time limit.
+
+identity-anchor-storage :
+: how is the root CA key stored?  How many people are needed to recover it?
+
+## Integrity and Privacy of included trust anchors
+
+For each trust anchor (public key) stored in the device, there will be an
+associated PKI.
+For each of those PKI the following questions need to be answered.
+
+pki-level :
+: how deep is the EE that will be evaluated
+
+pki-level-locked :
+: (a boolean) is the level where the EE cert will be found locked by the device, or can
+levels be added or deleted by the PKI operator without code changes to the
+device.
+
+pki-breadth :
+: how many different EE certificates exist in this PKI
+
+pki-lock-policy :
+: can any EE certificate be used with this trust anchor to sign?  Or, is there
+some kind of policy OID or Subject restriction?  Are specific intermediate
+CAs needed that lead to the EE?
+
+pki-anchor-storage:
+: how is the root CA stored? How many people are needed to recover it?
 
 
 # Privacy Considerations
