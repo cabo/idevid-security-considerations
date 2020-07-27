@@ -30,6 +30,7 @@ author:
 
 normative:
   BCP14: RFC8174
+  RFC5280:
   I-D.moskowitz-ecdsa-pki:
   ieee802-1AR:
     target: "http://standards.ieee.org/findstds/standard/802.1AR-2009.html"
@@ -97,7 +98,8 @@ informative:
 
   shamir79:
     title: "How to share a secret."
-    author: "Adi Shamirt"
+    author:
+      name: "Adi Shamir"
     date: "1979"
     target: "https://www.cs.jhu.edu/~sdoshi/crypto/papers/shamirturing.pdf"
 
@@ -170,7 +172,7 @@ informative:
 This document provides a nomenclature to describe ways in which manufacturers
 secure private keys and public trust anchors in devices.
 
-[RFCEDITOR: please remove] This work is occuring in https://github.com/mcr/idevid-security-considerations
+RFCEDITOR: please remove this paragraph. This work is occuring in https://github.com/mcr/idevid-security-considerations
 
 --- middle
 
