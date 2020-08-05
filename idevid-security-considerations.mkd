@@ -1,7 +1,7 @@
 ---
-title: Security and Operational considerations for manufacturer installed keys and anchors
+title: A Toxonomy of operational security of manufacturer installed keys and anchors
 abbrev: IDevID Considerations
-docname: draft-richardson-secdispatch-idevid-considerations-02
+docname: draft-richardson-t2trg-idevid-considerations-00
 
 ipr: trust200902
 area: Internet
@@ -169,8 +169,14 @@ informative:
 
 --- abstract
 
-This document provides a nomenclature to describe ways in which manufacturers
-secure private keys and public trust anchors in devices.
+This document provides a toxonomy of methods by manufacturers of silicon and devices
+secure private keys and public trust anchors.
+This deals with two related activities: how trust anchors and private keys
+are installed into devices during manufacturer, and how the related
+manufacturer held private keys are secured against disclosure.
+
+This document does not evaluate the different mechanisms, but rather just
+serves to name them in a consistent manner in order to aid in communication.
 
 RFCEDITOR: please remove this paragraph. This work is occuring in https://github.com/mcr/idevid-security-considerations
 
