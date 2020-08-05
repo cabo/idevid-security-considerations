@@ -1,4 +1,4 @@
-DRAFT:=idevid-security-considerations
+DRAFT:=taxonomy-idevid-operational-security
 VERSION:=$(shell ./getver ${DRAFT}.mkd )
 EXAMPLES=
 
