@@ -405,7 +405,16 @@ A number of protocols depend upon this certificate.
 
 * {{I-D.ietf-rats-architecture}} depends upon a key provisioned into the Attesting Environment to sign Evidence.
 
-* {{I-D.ietf-suit-architecture}} may depend upon a key provisioned into the device in order to decrypt software updates.
+* {{I-D.ietf-suit-architecture}} may depend upon a key provisioned into the
+  device in order to decrypt software updates.
+Both symmetric and asymmetric keys are possible.
+In both cases, the decrypt operation depends upon the device having access to
+a private key provisioned in advance.
+The IDevID can be used for this if algorithm choices permit.
+ECDSA keys do not directly support encryption in the say that RSA does, for
+instance, but the addition of ECIES can solve this.
+There may be other legal considerations why the IDevID might not be used, and
+a second key provisioned.
 
 * TBD
 
