@@ -39,9 +39,15 @@ normative:
 
 informative:
   I-D.ietf-anima-bootstrapping-keyinfra: BRSKI
+  I-D.richardson-anima-voucher-delegation:
+  I-D.friel-anima-brski-cloud:
+  I-D.ietf-anima-constrained-voucher:
+  I-D.ietf-anima-brski-async-enroll:
   I-D.moskowitz-ecdsa-pki:
+  RFC4949:
   RFC5011:
   RFC8366:
+  RFC8572:
   RFC7030:
   I-D.gutmann-scep: SCEP
   RFC4210: CMP
@@ -400,7 +406,7 @@ The process of making this coordinated key pair and then installing it into the 
 
 A number of protocols depend upon this certificate.
 
-* {{RFC8572}} and {{I-D.ietf-anima-bootstrapping-keyinfra}} introduce mechanisms for new devices (called pledges) to be onboarded into a network without intervention from an expert operator. A number of derived protocols such as {{I-D.anima-brski-async-enroll}},                {{I-D.ietf-anima-constrained-voucher}}, {{I-D.richardson-anima-voucher-delegation}}, {{I-D.friel-anima-brski-cloud}} extend this in a number of ways.
+* {{RFC8572}} and {{I-D.ietf-anima-bootstrapping-keyinfra}} introduce mechanisms for new devices (called pledges) to be onboarded into a network without intervention from an expert operator. A number of derived protocols such as {{I-D.ietf-anima-brski-async-enroll}},                {{I-D.ietf-anima-constrained-voucher}}, {{I-D.richardson-anima-voucher-delegation}}, {{I-D.friel-anima-brski-cloud}} extend this in a number of ways.
 
 * {{I-D.ietf-rats-architecture}} depends upon a key provisioned into the Attesting Environment to sign Evidence.
 
@@ -535,7 +541,7 @@ SCEP {{I-D.gutmann-scep}}).
 {{RFC5280}} provides mechanisms to deal with multi-level certification
 authorities, but it is not always clear what operating rules apply.
 
-The certification authority (CA) that is central to {{RFC520}}-style public key infrastructures can suffer two kinds of failures:
+The certification authority (CA) that is central to {{RFC5280}}-style public key infrastructures can suffer two kinds of failures:
 1. disclosure of a private key.
 2. loss of a private key.
 
