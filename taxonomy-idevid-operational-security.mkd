@@ -4,8 +4,7 @@ abbrev: IDevID Considerations
 docname: draft-richardson-t2trg-idevid-considerations-03
 
 ipr: trust200902
-area: Internet
-wg: T2TRG
+wg: T2TRG Research Group
 kw: Internet-Draft
 cat: info
 stand_alone: true

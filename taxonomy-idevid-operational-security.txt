@@ -2,7 +2,7 @@
 
 
 
-T2TRG                                                      M. Richardson
+T2TRG Research Group                                       M. Richardson
 Internet-Draft                                  Sandelman Software Works
 Intended status: Informational                          22 February 2021
 Expires: 26 August 2021
@@ -829,8 +829,8 @@ Internet-Draft            IDevID Considerations            February 2021
    In the degenerate case of a self-signed certificate, then this a one
    level PKI.
 
-   .----------<-.
-   |Issuer= X | |
+   .----------.<-.
+   |Issuer= X |  |
    |Subject=X |--'
    '----------'
 
@@ -847,8 +847,8 @@ Internet-Draft            IDevID Considerations            February 2021
    (EE) certificates, then this is a two level PKI.
 
    .----------.<-.
-   |Issuer= X |  |
-   |Subject=X |--'
+   |Issuer= X |  |   root
+   |Subject=X |--'    CA
    '----------'
       |     \-------\
       v             |
@@ -862,8 +862,8 @@ Internet-Draft            IDevID Considerations            February 2021
    certificates, then this is a three level PKI.
 
                   .----------.<-.
-                  |Issuer= X |  |
-                  |Subject=X |--'
+      root        |Issuer= X |  |
+       CA         |Subject=X |--'
                   '----------'
          .-----------'     '------------.
          v                              v
@@ -1098,16 +1098,16 @@ Internet-Draft            IDevID Considerations            February 2021
               Pritikin, M., Richardson, M., Eckert, T., Behringer, M.,
               and K. Watsen, "Bootstrapping Remote Secure Key
               Infrastructures (BRSKI)", Work in Progress, Internet-
-              Draft, draft-ietf-anima-bootstrapping-keyinfra-45, 11
-              November 2020, <http://www.ietf.org/internet-drafts/draft-
-              ietf-anima-bootstrapping-keyinfra-45.txt>.
+              Draft, draft-ietf-anima-bootstrapping-keyinfra-43, 7
+              August 2020, <http://www.ietf.org/internet-drafts/draft-
+              ietf-anima-bootstrapping-keyinfra-43.txt>.
 
    [I-D.richardson-anima-voucher-delegation]
-              Richardson, M. and J. Yang, "Delegated Authority for
+              Richardson, M. and L. Xia, "Delegated Authority for
               Bootstrap Voucher Artifacts", Work in Progress, Internet-
-              Draft, draft-richardson-anima-voucher-delegation-02, 18
-              September 2020, <http://www.ietf.org/internet-drafts/
-              draft-richardson-anima-voucher-delegation-02.txt>.
+              Draft, draft-richardson-anima-voucher-delegation-01, 9
+              March 2020, <http://www.ietf.org/internet-drafts/draft-
+              richardson-anima-voucher-delegation-01.txt>.
 
 
 
@@ -1126,31 +1126,31 @@ Internet-Draft            IDevID Considerations            February 2021
               Friel, O., Shekh-Yusef, R., and M. Richardson, "BRSKI
               Cloud Registrar", Work in Progress, Internet-Draft, draft-
               friel-anima-brski-cloud-03, 24 September 2020,
-              <http://www.ietf.org/internet-drafts/draft-friel-anima-
+              <https://www.ietf.org/internet-drafts/draft-friel-anima-
               brski-cloud-03.txt>.
 
    [I-D.ietf-anima-constrained-voucher]
-              Richardson, M., Stok, P., and P. Kampanakis, "Constrained
-              Voucher Artifacts for Bootstrapping Protocols", Work in
-              Progress, Internet-Draft, draft-ietf-anima-constrained-
-              voucher-09, 2 November 2020, <http://www.ietf.org/
-              internet-drafts/draft-ietf-anima-constrained-voucher-
-              09.txt>.
+              Richardson, M., Stok, P. V. D., Kampanakis, P., and E.
+              Dijk, "Constrained Voucher Artifacts for Bootstrapping
+              Protocols", Work in Progress, Internet-Draft, draft-ietf-
+              anima-constrained-voucher-10, 21 February 2021,
+              <https://www.ietf.org/internet-drafts/draft-ietf-anima-
+              constrained-voucher-10.txt>.
 
    [I-D.ietf-anima-brski-async-enroll]
               Fries, S., Brockhaus, H., Lear, E., and T. Werner,
               "Support of asynchronous Enrollment in BRSKI (BRSKI-AE)",
               Work in Progress, Internet-Draft, draft-ietf-anima-brski-
-              async-enroll-01, 7 January 2021, <http://www.ietf.org/
+              async-enroll-01, 7 January 2021, <https://www.ietf.org/
               internet-drafts/draft-ietf-anima-brski-async-enroll-
               01.txt>.
 
    [I-D.moskowitz-ecdsa-pki]
-              Moskowitz, R., Birkholz, H., Xia, L., and M. Richardson,
-              "Guide for building an ECC pki", Work in Progress,
-              Internet-Draft, draft-moskowitz-ecdsa-pki-09, 9 August
-              2020, <http://www.ietf.org/internet-drafts/draft-
-              moskowitz-ecdsa-pki-09.txt>.
+              Moskowitz, R., Birkholz, H., Xia, L., and M. C.
+              Richardson, "Guide for building an ECC pki", Work in
+              Progress, Internet-Draft, draft-moskowitz-ecdsa-pki-10, 31
+              January 2021, <https://www.ietf.org/internet-drafts/draft-
+              moskowitz-ecdsa-pki-10.txt>.
 
    [RFC4949]  Shirey, R., "Internet Security Glossary, Version 2",
               FYI 36, RFC 4949, DOI 10.17487/RFC4949, August 2007,
@@ -1186,7 +1186,7 @@ Internet-Draft            IDevID Considerations            February 2021
    [I-D.gutmann-scep]
               Gutmann, P., "Simple Certificate Enrolment Protocol", Work
               in Progress, Internet-Draft, draft-gutmann-scep-16, 27
-              March 2020, <http://www.ietf.org/internet-drafts/draft-
+              March 2020, <https://www.ietf.org/internet-drafts/draft-
               gutmann-scep-16.txt>.
 
    [RFC4210]  Adams, C., Farrell, S., Kause, T., and T. Mononen,
@@ -1304,35 +1304,35 @@ Internet-Draft            IDevID Considerations            February 2021
               Richardson, M., Wallace, C., and W. Pan, "Use cases for
               Remote Attestation common encodings", Work in Progress,
               Internet-Draft, draft-richardson-rats-usecases-08, 2
-              November 2020, <http://www.ietf.org/internet-drafts/draft-
-              richardson-rats-usecases-08.txt>.
+              November 2020, <https://www.ietf.org/internet-drafts/
+              draft-richardson-rats-usecases-08.txt>.
 
    [I-D.ietf-suit-architecture]
               Moran, B., Tschofenig, H., Brown, D., and M. Meriac, "A
               Firmware Update Architecture for Internet of Things", Work
               in Progress, Internet-Draft, draft-ietf-suit-architecture-
-              15, 17 January 2021, <http://www.ietf.org/internet-drafts/
-              draft-ietf-suit-architecture-15.txt>.
+              16, 27 January 2021, <https://www.ietf.org/internet-
+              drafts/draft-ietf-suit-architecture-16.txt>.
 
    [I-D.ietf-emu-eap-noob]
               Aura, T., Sethi, M., and A. Peltonen, "Nimble out-of-band
               authentication for EAP (EAP-NOOB)", Work in Progress,
               Internet-Draft, draft-ietf-emu-eap-noob-03, 13 December
-              2020, <http://www.ietf.org/internet-drafts/draft-ietf-emu-
-              eap-noob-03.txt>.
+              2020, <https://www.ietf.org/internet-drafts/draft-ietf-
+              emu-eap-noob-03.txt>.
 
    [I-D.ietf-rats-architecture]
               Birkholz, H., Thaler, D., Richardson, M., Smith, N., and
               W. Pan, "Remote Attestation Procedures Architecture", Work
               in Progress, Internet-Draft, draft-ietf-rats-architecture-
-              08, 8 December 2020, <http://www.ietf.org/internet-drafts/
-              draft-ietf-rats-architecture-08.txt>.
+              10, 9 February 2021, <https://www.ietf.org/internet-
+              drafts/draft-ietf-rats-architecture-10.txt>.
 
    [I-D.birkholz-suit-coswid-manifest]
               Birkholz, H., "A SUIT Manifest Extension for Concise
               Software Identifiers", Work in Progress, Internet-Draft,
               draft-birkholz-suit-coswid-manifest-00, 17 July 2018,
-              <http://www.ietf.org/internet-drafts/draft-birkholz-suit-
+              <https://www.ietf.org/internet-drafts/draft-birkholz-suit-
               coswid-manifest-00.txt>.
 
 
@@ -1349,7 +1349,7 @@ Internet-Draft            IDevID Considerations            February 2021
    [I-D.birkholz-rats-mud]
               Birkholz, H., "MUD-Based RATS Resources Discovery", Work
               in Progress, Internet-Draft, draft-birkholz-rats-mud-00, 9
-              March 2020, <http://www.ietf.org/internet-drafts/draft-
+              March 2020, <https://www.ietf.org/internet-drafts/draft-
               birkholz-rats-mud-00.txt>.
 
    [RFC8520]  Lear, E., Droms, R., and D. Romascanu, "Manufacturer Usage
@@ -1361,8 +1361,8 @@ Internet-Draft            IDevID Considerations            February 2021
               Birkholz, H., Fitzgerald-McKay, J., Schmidt, C., and D.
               Waltermire, "Concise Software Identification Tags", Work
               in Progress, Internet-Draft, draft-ietf-sacm-coswid-16, 2
-              November 2020, <http://www.ietf.org/internet-drafts/draft-
-              ietf-sacm-coswid-16.txt>.
+              November 2020, <https://www.ietf.org/internet-drafts/
+              draft-ietf-sacm-coswid-16.txt>.
 
    [RFC7168]  Nazar, I., "The Hyper Text Coffee Pot Control Protocol for
               Tea Efflux Appliances (HTCPCP-TEA)", RFC 7168,
@@ -1373,7 +1373,7 @@ Internet-Draft            IDevID Considerations            February 2021
               Bormann, C., Ersue, M., Keranen, A., and C. Gomez,
               "Terminology for Constrained-Node Networks", Work in
               Progress, Internet-Draft, draft-bormann-lwig-7228bis-06, 9
-              March 2020, <http://www.ietf.org/internet-drafts/draft-
+              March 2020, <https://www.ietf.org/internet-drafts/draft-
               bormann-lwig-7228bis-06.txt>.
 
    [I-D.ietf-teep-architecture]
@@ -1381,7 +1381,7 @@ Internet-Draft            IDevID Considerations            February 2021
               "Trusted Execution Environment Provisioning (TEEP)
               Architecture", Work in Progress, Internet-Draft, draft-
               ietf-teep-architecture-13, 2 November 2020,
-              <http://www.ietf.org/internet-drafts/draft-ietf-teep-
+              <https://www.ietf.org/internet-drafts/draft-ietf-teep-
               architecture-13.txt>.
 
 Author's Address
