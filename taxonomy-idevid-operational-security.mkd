@@ -5,7 +5,7 @@ docname: draft-richardson-t2trg-idevid-considerations-01
 
 ipr: trust200902
 area: Internet
-wg: anima Working Group
+wg: T2TRG
 kw: Internet-Draft
 cat: info
 stand_alone: true
@@ -176,8 +176,8 @@ informative:
 
 --- abstract
 
-This document provides a toxonomy of methods by manufacturers of silicon and devices
-secure private keys and public trust anchors.
+This document provides a taxonomy of methods by manufacturers of silicon and devices
+to secure private keys and public trust anchors.
 This deals with two related activities: how trust anchors and private keys
 are installed into devices during manufacturing, and how the related
 manufacturer held private keys are secured against disclosure.
@@ -221,7 +221,7 @@ These security artifacts are used to anchor other chains of information: an EAT 
 Known software versions lead directly to vendor/distributor signed Software Bill of Materials (SBOM), such as those described by {{?I-D.ietf-sacm-coswid}} and the NTIA/SBOM work {{ntiasbom}} and CISQ/OMG SBOM work underway {{cisqsbom}}.
 
 In order to manage risks and assess vulnerabilities in a Supply Chain, it is necessary to determine a degree of trustworthiness in each device.
-A device may mislead audit systems as to its provenance, about its software load or even about what kind of device it is (see {{?RFC7168}} for a humoros example).
+A device may mislead audit systems as to its provenance, about its software load or even about what kind of device it is (see {{?RFC7168}} for a humorous example).
 In order to properly assess the security of a Supply Chain it is necessary to understand the kinds and severity of the threats which a device has been designed to resist.
 To do this, it is necessary to understand the ways in which the different trust anchors and identities are initially provisioned, are protected, and are updated.
 
