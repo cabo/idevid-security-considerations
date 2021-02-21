@@ -176,7 +176,7 @@ informative:
 
 --- abstract
 
-This document provides a taxonomy of methods by manufacturers of silicon and devices
+This document provides a taxonomy of methods used by manufacturers of silicon and devices
 to secure private keys and public trust anchors.
 This deals with two related activities: how trust anchors and private keys
 are installed into devices during manufacturing, and how the related
@@ -197,9 +197,9 @@ This includes adding, replacing or deleting anchors.
 
 Many protocols also leverage manufacturer installed identities.
 These identities are usually in the form of {{ieee802-1AR}} Initial Device Identity certificates (IDevID).
-The identity has two components: a private key that must remain under the strict control of a trusted part of the device, and a public part (the certificate), which (ignoring, for the moment, privacy concerns) may be freely disclosed.
+The identity has two components: a private key that must remain under the strict control of a trusted part of the device, and a public part (the certificate), which (ignoring, for the moment, personal privacy concerns) may be freely disclosed.
 
-There also situations where identities which are tied up in the provision of symmetric shared secret.
+There also situations where identities are tied up in the provision of symmetric shared secret.
 A common example is the SIM card ({{3GPP.51.011}}), it now comes as a virtual SIM, but which is usually not provisioned at the factory.
 The provision of an initial, per-device default password also falls into the category of symmetric shared secret.
 
@@ -211,17 +211,21 @@ The trust anchors are used for a variety of purposes.
 Trust anchors are used to verify:
 
 * the signature on a software update (as per {{?I-D.ietf-suit-architecture}}).
+
 * a TLS Server Certificate, such as when setting up an HTTPS connection.
+
 * the {{RFC8366}} format voucher that provides proof of an ownership change
 
 Device identity keys are used when performing enrollment requests (in {{?I-D.ietf-anima-bootstrapping-keyinfra}}, and in some uses of {{?I-D.ietf-emu-eap-noob}}.
 The device identity certificate is also used to sign Evidence by an Attesting Environment (see {{?I-D.ietf-rats-architecture}}).
 
 These security artifacts are used to anchor other chains of information: an EAT Claim as to the version of software/firmware running on a device ({{?I-D.birkholz-suit-coswid-manifest}}), an EAT claim about legitimate network activity (via {{?I-D.birkholz-rats-mud}}, or embedded in the IDevID in {{?RFC8520}}).
+
 Known software versions lead directly to vendor/distributor signed Software Bill of Materials (SBOM), such as those described by {{?I-D.ietf-sacm-coswid}} and the NTIA/SBOM work {{ntiasbom}} and CISQ/OMG SBOM work underway {{cisqsbom}}.
 
 In order to manage risks and assess vulnerabilities in a Supply Chain, it is necessary to determine a degree of trustworthiness in each device.
 A device may mislead audit systems as to its provenance, about its software load or even about what kind of device it is (see {{?RFC7168}} for a humorous example).
+
 In order to properly assess the security of a Supply Chain it is necessary to understand the kinds and severity of the threats which a device has been designed to resist.
 To do this, it is necessary to understand the ways in which the different trust anchors and identities are initially provisioned, are protected, and are updated.
 
@@ -252,7 +256,7 @@ located at the factory that built the device
 mechanically-installed:
 : when a key or certificate is programmed into non-volatile storage by out-of-band mechanism like JTAG {{JTAG}}
 
-mechanically-transfered:
+mechanically-transferred:
 : when a key or certificate is transferred into a system via private interface, such as serial console, JTAG managed mailbox, or other physically private interface
 
 network-transfered:
@@ -265,7 +269,7 @@ device/infrastructure-co-generated:
 # Applicability Model
 
 There is a wide variety of devices to which this analysis can apply. (See {{?I-D.bormann-lwig-7228bis}})
-This document will use a J-group class C13 as a sample.
+This document will use a J-group as a sample.
 This class is sufficiently large to experience complex issues among multiple CPUs, packages and operating systems, but at the same time, small enough that this class is often deployed in single-purpose IoT-like uses.
 Devices in this class often have Secure Enclaves (such as the "Grapeboard"), and can include silicon manufacturer controlled processors in the boot process (the Raspberry PI boots under control of the GPU).
 
@@ -288,7 +292,10 @@ Those details are important to performing a full evaluation, but do not matter m
 During the manufacturing process, once the components have been soldered to the board, the system is usually put through a system-level test.
 This is often done on as a "bed-of-nails" test {{BedOfNails}}, where the board has key points attached mechanically to a test system.
 A {{JTAG}} process tests the System Under Test, and then initializes some firmware into the still empty flash storage.
+
 It is now common for a factory test image to be loaded first: this image will include code to initialize the private memory key described above, and will include a first-stage bootloader and some kind of (primitive) Trusted Application Manager (TAM).
+(The TAM is a piece of software that lives within the trusted execution environment)
+
 Embedded in the stage one bootloader will be a Trust Anchor that is able to verify the second-stage bootloader image.
 
 After the system has undergone testing, the factory test image is erased, leaving the first-stage bootloader.
@@ -309,7 +316,8 @@ Quality control testing may be done prior to as well as after the application of
 
 # Types of Trust Anchors
 
-Trust Anchors are fundamentally public keys.
+Trust Anchors (TrAnc) are fundamentally public keys with authorizations implicitely attached through the code that references them.
+
 They are used to validate other digitally signed artifacts.
 Typically, these are chains of PKIX certificates leading to an End-Entity certificate (EE).
 
@@ -327,13 +335,13 @@ When evaluating the degree of trust for each trust anchor there are four aspects
 * can the trust anchor be replaced or modified?
 * can additional trust anchors be added?
 * can trust anchors be removed?
-* how is the private key associated with the trust anchor stored?
+* how is the private key associated with the trust anchor, maintained by the manufacturer, maintained?
 
 The first three things are device specific properties of how the integrity of the trust anchor is maintained.
 
 The fourth property has nothing to do with the device, but has to do with the reputation and care of the entity that maintains the private key.
 
-Different anchors have different purposes implied by the authorization associated with them.
+Different anchors have different authorizations associated with them.
 
 These are:
 
@@ -359,7 +367,7 @@ In this situation the application code is not in a secured boot situation, as th
 
 ## Trusted Application Manager anchor
 
-This anchor is part of a {{I-D.ietf-teep-architecture}} Trusted Application Manager (TAM).
+This anchor the secure key for the {{I-D.ietf-teep-architecture}} Trusted Application Manager (TAM).
 Code which is signed by this anchor will be given execution privileges as described by the manifest which accompanies the code.
 This privilege may include updating anchors.
 
@@ -396,7 +404,9 @@ TBD?
 Identities are installed during manufacturing time for a variety of purposes.
 
 Identities require some private component.
-Asymmetric identities (e.g., RSA, ECDSA, EdDSA systems) require a co-responding public component, usually in the form of a certificate signed by a trusted third party.
+Asymmetric identities (e.g., RSA, ECDSA, EdDSA systems) require a corresponding public component, usually in the form of a certificate signed by a trusted third party.
+
+This certificate associates the identity with attributes.
 
 The process of making this coordinated key pair and then installing it into the device is called identity provisioning.
 
@@ -425,7 +435,7 @@ a second key provisioned.
 
 ### Operational Considerations for Manufacturer IDevID Public Key Infrastructure
 
-The manufacturer has the responsibility to provision a keypair into each
+The manufacturer has the responsibility to provision a key pair into each
 device as part of the manufacturing process.
 There are a variety of mechanisms to accomplish this, which this document will overview.
 
@@ -542,11 +552,16 @@ SCEP {{I-D.gutmann-scep}}).
 authorities, but it is not always clear what operating rules apply.
 
 The certification authority (CA) that is central to {{RFC5280}}-style public key infrastructures can suffer two kinds of failures:
+
 1. disclosure of a private key.
+
 2. loss of a private key.
+
+3. inappropriate signing of a certificate from an unauthorized source
 
 A PKI which discloses one or more private certification authority keys is no
 longer secure.
+
 An attacker can create new identities, and forge certificates connecting
 existing identities to attacker controlled public/private keypairs.
 This can permit the attacker to impersonate any specific device.
@@ -663,6 +678,7 @@ This document does not assign valuation to the answers.
 
 initial-enclave-location:
 : Is the location of the initial software trust anchor internal to the CPU package?
+Some systems have a software verification public key which is built into the CPU package, while other systems store that initial key in a non-volatile device external to the CPU.
 
 initial-enclave-integrity-key:
 : If the first-stage bootloader is external to the CPU, and it is integrity protected, where is the key used to check the integrity?
@@ -718,7 +734,7 @@ levels be added or deleted by the PKI operator without code changes to the
 device.
 
 pki-breadth:
-: how many different non-expired EE certificates exist in this PKI
+: how many different non-expired EE certificates is the PKI designed to manage?
 
 pki-lock-policy:
 : can any EE certificate be used with this trust anchor to sign?  Or, is there

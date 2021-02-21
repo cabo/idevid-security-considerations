@@ -5,8 +5,8 @@
    |     \-----------------------\
    v                             |
 .----------.                   .----------.
-|Issuer= X |                   |Issuer= X |
-|Subject=Y1|                   |Subject=Y2|
+|Issuer= X |    subordinate    |Issuer= X |
+|Subject=Y1|        CA         |Subject=Y2|
 '----------'                   '----------'
    |     \--------\              |     \---------\
    V              |              V               |
