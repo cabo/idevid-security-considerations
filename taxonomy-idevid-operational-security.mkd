@@ -22,12 +22,6 @@ author:
   org: Sandelman Software Works
   email: mcr+ietf@sandelman.ca
 
-- ins: J. Yang
-  name: Jie Yang
-  org: Huawei Technologies Co., Ltd.
-  email: jay.yang@huawei.com
-
-
 normative:
   RFC5280:
   ieee802-1AR:
