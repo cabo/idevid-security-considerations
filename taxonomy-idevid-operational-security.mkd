@@ -161,11 +161,11 @@ informative:
     date: "2020-07-01"
 
   CABFORUM:
-    target: "https://cabforum.org/wp-content/uploads/BRv1.2.2.pdf"
+    target: "https://cabforum.org/wp-content/uploads/CA-Browser-Forum-BR-1.7.3.pdf"
     author:
       org: "CA/Browser Forum"
-    title: "CA/Browser Forum Baseline Requirements for the Issuance and Management of Publicly-Trusted Certificates, v.1.2.2"
-    date: "October 2014"
+    title: "CA/Browser Forum Baseline Requirements for the Issuance and Management of Publicly-Trusted Certificates, v.1.7.3"
+    date: "October 2020"
 
 --- abstract
 
@@ -292,7 +292,7 @@ It is now common for a factory test image to be loaded first: this image will in
 Embedded in the stage one bootloader will be a Trust Anchor that is able to verify the second-stage bootloader image.
 
 After the system has undergone testing, the factory test image is erased, leaving the first-stage bootloader.
-One or more second-stage bootloader images is installed.
+One or more second-stage bootloader images are installed.
 The production image may be installed at that time, or if the second-stage bootloader is able to install it over the network, it may be done that way instead.
 
 There are many variations of the above process, and this section is not attempting to be prescriptive, but to be provide enough illustration to motivate subsequent terminology.
@@ -304,6 +304,7 @@ Or a combination of the above.
 These steps may all occur on an access-controlled assembly line, or the system boards may be shipped from one place to another (maybe another country) before undergoing testing.
 
 Some systems are intended to be shipped in a tamper-proof state, but it is usually not desirable that bed-of-nails testing be possible without tampering, so the initialization process is usually done prior to rendering the system tamper-proof.
+An example of a one-way tamper-proof, weather resistant treatment might to mount the system board in a plastic case and fill the case with resin.
 
 Quality control testing may be done prior to as well as after the application of tamper-proofing, as systems which do not pass inspection may be reworked to fix flaws, and this should ideally be impossible once the system has been made tamper-proof.
 
