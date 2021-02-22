@@ -598,7 +598,7 @@ then this is a two level PKI.
 {::include two-level.txt}
 ~~~~
 
-When this first level authority signs intermediate certification authorities,
+When this first level authority signs suborbinate certification authorities,
 and those certification authorities sign End-Entity certificates, then
 this is a three level PKI.
 
@@ -611,7 +611,7 @@ bottom, and the Trust Anchor at the top, then the level is where the deepest EE
 certificates are, counting from one.
 
 It is quite common to have a three level PKI, where the root of the CA is
-stored in a Hardware Security Module, while the level one intermediate CA is
+stored in a Hardware Security Module, while the level one suborbinate CA is
 available in an online form.
 
 ## Protection of CA private keys
@@ -698,13 +698,13 @@ manufacturer.
 identity-pki-level:
 : how deep are the IDevID certificates that are issued?
 
-identity-time-limits-per-intermediate:
-: how long is each intermediate CA maintained before a new
-intermediate CA key is generated?  There may be no time limit, only a device
+identity-time-limits-per-subordinate:
+: how long is each subordinate CA maintained before a new
+subordinate CA key is generated?  There may be no time limit, only a device
 count limit.
 
-identity-number-per-intermediate:
-: how many identities are signed by a particular intermediate CA before it is
+identity-number-per-subordinate:
+: how many identities are signed by a particular subordinate CA before it is
 retired?  There may be no numeric limit, only a time limit.
 
 identity-anchor-storage:
@@ -732,7 +732,7 @@ pki-breadth:
 
 pki-lock-policy:
 : can any EE certificate be used with this trust anchor to sign?  Or, is there
-some kind of policy OID or Subject restriction?  Are specific intermediate
+some kind of policy OID or Subject restriction?  Are specific subordinate
 CAs needed that lead to the EE?
 
 pki-anchor-storage:
