@@ -1,15 +1,15 @@
-.----------.<-.
-|Issuer= X |  |
-|Subject=X |--'
-'----------'
-   |     \-----------------------\
-   v                             |
-.----------.                   .----------.
-|Issuer= X |    subordinate    |Issuer= X |
-|Subject=Y1|        CA         |Subject=Y2|
-'----------'                   '----------'
-   |     \--------\              |     \---------\
-   V              |              V               |
+               .----------.<-.
+   root        |Issuer= X |  |
+    CA         |Subject=X |--'
+               '----------'
+      .-----------'     '------------.
+      v                              v
+   .----------.                   .----------.
+   |Issuer= X |    subordinate    |Issuer= X |
+   |Subject=Y1|        CA         |Subject=Y2|
+   '----------'                   '----------'
+   .--'   '-------.              .---'    '------.
+   v              v              v               v
 .----EE----.    .----EE----.   .----EE----.    .----EE----.
 |Issuer= Y1|    |Issuer= Y1|   |Issuer= Y2|    |Issuer= Y2|
 |Subject=Z1|    |Subject=Z1|   |Subject=Z3|    |Subject=Z4|
