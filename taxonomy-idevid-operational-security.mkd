@@ -42,7 +42,7 @@ informative:
   RFC8366:
   RFC8572:
   RFC7030:
-  I-D.gutmann-scep: SCEP
+  RFC8894: SCEP
   RFC4210: CMP
   3GPP.51.011:
 
@@ -77,20 +77,20 @@ informative:
      target: "https://cryptography.fandom.com/wiki/Root_Key_Ceremony"
      author:
        org: "Community"
-     date: "2020-04-04"
+     date: 2020-04-04
 
   keyceremony2:
      title: "SAS 70 Key Ceremony"
      target: "http://www.digi-sign.com/compliance/key%20ceremony/index"
      author:
        org: "Digi-Sign"
-     date: "2020-04-04"
+     date: 2020-04-04
 
   shamir79:
     title: "How to share a secret."
     author:
       name: "Adi Shamir"
-    date: "1979"
+    date: 1979
     target: "https://www.cs.jhu.edu/~sdoshi/crypto/papers/shamirturing.pdf"
 
   nistsp800-57:
@@ -105,21 +105,21 @@ informative:
     title: "FIDO TechNotes: The Truth about Attestation"
     author:
       org: "FIDO Alliance"
-    date: "2018-07-19"
+    date: 2018-07-19
 
   ntiasbom:
     target: "https://www.ntia.doc.gov/SoftwareTransparency"
-    title: "NTIA Software Compoment Transparency"
+    title: "NTIA Software Component Transparency"
     author:
       org: "NTIA"
-      date: "2020-07-01"
+    date: 2020-07-01
 
   cisqsbom:
     target: "https://www.it-cisq.org/software-bill-of-materials/index.htm"
     title: "TOOL-TO-TOOL SOFTWARE BILL OF MATERIALS EXCHANGE"
     author:
       org: "CISQ/Object Management Group"
-    date: "2020-07-01"
+    date: 2020-07-01
 
   ComodoGate:
     target: "https://www.theregister.com/2011/03/28/comodo_gate_hacker_breaks_cover/"
@@ -131,20 +131,22 @@ informative:
     title: "Defining a Standard Baseboard Management Controller Firmware Stack"
     author:
       org: "Linux Foundation/OpenBMC Group"
-    date: "2020-07-01"
+    date: 2020-07-01
 
   JTAG:
     title: "Joint Test Action Group"
     target: "https://en.wikipedia.org/wiki/JTAG"
     date: 2020-08-26
 
+# FIXME: Not used -- delete or reference?
   JTAGieee:
     target: "https://ieeexplore.ieee.org/document/5412866"
     title: "1149.7-2009 - IEEE Standard for Reduced-Pin and Enhanced-Functionality Test Access Port and Boundary-Scan Architecture"
     author:
       org: "IEEE Standard"
     date: 2009
-    doi: 10.1109/IEEESTD.2010.5412866
+    seriesinfo:
+      DOI: 10.1109/IEEESTD.2010.5412866
 
   rootkeyrollover:
     target: "https://www.icann.org/en/system/files/files/proposal-future-rz-ksk-rollovers-01nov19-en.pdf"
@@ -158,14 +160,14 @@ informative:
     title: "Bed of nails tester"
     author:
       org: "Wikipedia"
-    date: "2020-07-01"
+    date: 2020-07-01
 
   CABFORUM:
     target: "https://cabforum.org/wp-content/uploads/CA-Browser-Forum-BR-1.7.3.pdf"
     author:
       org: "CA/Browser Forum"
     title: "CA/Browser Forum Baseline Requirements for the Issuance and Management of Publicly-Trusted Certificates, v.1.7.3"
-    date: "October 2020"
+    date: October 2020
 
 --- abstract
 
@@ -192,24 +194,25 @@ Many protocols also leverage manufacturer installed identities.
 These identities are usually in the form of {{ieee802-1AR}} Initial Device Identity certificates (IDevID).
 The identity has two components: a private key that must remain under the strict control of a trusted part of the device, and a public part (the certificate), which (ignoring, for the moment, personal privacy concerns) may be freely disclosed.
 
-There also situations where identities are tied up in the provision of symmetric shared secret.
+There also situations where identities are tied up in the provision of symmetric shared secrets.
+<!-- FIXME: -->
 A common example is the SIM card ({{3GPP.51.011}}), it now comes as a virtual SIM, but which is usually not provisioned at the factory.
 The provision of an initial, per-device default password also falls into the category of symmetric shared secret.
 
 It is further not unusual for many devices (particularly smartphones) to also have one or more group identity keys.
-This is used in, for instance, in {{fidotechnote}} to make claims about being a particular model of phone (see {{?I-D.richardson-rats-usecases}}).
+This is used, for instance, in {{fidotechnote}} to make claims about being a particular model of phone (see {{?I-D.richardson-rats-usecases}}).
 The key pair that does this is loaded into large batches of phones for privacy reasons.
 
 The trust anchors are used for a variety of purposes.
 Trust anchors are used to verify:
 
-* the signature on a software update (as per {{?I-D.ietf-suit-architecture}}).
+* the signature on a software update (as per {{?I-D.ietf-suit-architecture}}),
 
-* a TLS Server Certificate, such as when setting up an HTTPS connection.
+* a TLS Server Certificate, such as when setting up an HTTPS connection,
 
-* the {{RFC8366}} format voucher that provides proof of an ownership change
+* the {{RFC8366}} format voucher that provides proof of an ownership change.
 
-Device identity keys are used when performing enrollment requests (in {{?I-D.ietf-anima-bootstrapping-keyinfra}}, and in some uses of {{?I-D.ietf-emu-eap-noob}}.
+Device identity keys are used when performing enrollment requests (in {{I-D.ietf-anima-bootstrapping-keyinfra}}, and in some uses of {{?I-D.ietf-emu-eap-noob}}.
 The device identity certificate is also used to sign Evidence by an Attesting Environment (see {{?I-D.ietf-rats-architecture}}).
 
 These security artifacts are used to anchor other chains of information: an EAT Claim as to the version of software/firmware running on a device ({{?I-D.birkholz-suit-coswid-manifest}}), an EAT claim about legitimate network activity (via {{?I-D.birkholz-rats-mud}}, or embedded in the IDevID in {{?RFC8520}}).
@@ -222,8 +225,8 @@ A device may mislead audit systems as to its provenance, about its software load
 In order to properly assess the security of a Supply Chain it is necessary to understand the kinds and severity of the threats which a device has been designed to resist.
 To do this, it is necessary to understand the ways in which the different trust anchors and identities are initially provisioned, are protected, and are updated.
 
-To do this, this document details the different trust anchors (TrA) and identities (IDs) found in typical devices.
-The privacy and integrity of the TAs and IDs is often provided by a different, superior artifact.
+To do this, this document details the different trust anchors (TrAnc) and identities (IDs) found in typical devices.
+The privacy and integrity of the TrAncs and IDs is often provided by a different, superior artifact.
 This relationship is examined.
 
 While many might desire to assign numerical values to different mitigation techniques in order to be able to rank them,  this document does not attempt to do that, as there are too many other (mostly human) factors that would come into play.
@@ -247,13 +250,14 @@ infrastructure-generated:
 located at the factory that built the device
 
 mechanically-installed:
-: when a key or certificate is programmed into non-volatile storage by out-of-band mechanism like JTAG {{JTAG}}
+: when a key or certificate is programmed into non-volatile storage by
+  an out-of-band mechanism such as JTAG {{JTAG}}
 
 mechanically-transferred:
 : when a key or certificate is transferred into a system via private interface, such as serial console, JTAG managed mailbox, or other physically private interface
 
-network-transfered:
-: when a key or certificate is transfered into a system using a network interface which would be available after the device has shipped.  This applies even if the network is physically attached using a bed-of-nails.
+network-transferred:
+: when a key or certificate is transferred into a system using a network interface which would be available after the device has shipped.  This applies even if the network is physically attached using a bed-of-nails {{BedOfNails}}.
 
 device/infrastructure-co-generated:
 : when a private or symmetric key is derived from a secret previously synchronized between the silicon vendor and the factory using a common algorithm.
@@ -261,8 +265,9 @@ device/infrastructure-co-generated:
 
 # Applicability Model
 
-There is a wide variety of devices to which this analysis can apply. (See {{?I-D.bormann-lwig-7228bis}})
-This document will use a J-group as a sample.
+There is a wide variety of devices to which this analysis can apply.
+(See {{?I-D.bormann-lwig-7228bis}}.)
+This document will use a J-group processor as a sample.
 This class is sufficiently large to experience complex issues among multiple CPUs, packages and operating systems, but at the same time, small enough that this class is often deployed in single-purpose IoT-like uses.
 Devices in this class often have Secure Enclaves (such as the "Grapeboard"), and can include silicon manufacturer controlled processors in the boot process (the Raspberry PI boots under control of the GPU).
 
@@ -283,11 +288,11 @@ It may use a custom interface to the rest of the system, or it may implement the
 Those details are important to performing a full evaluation, but do not matter much to this model (see initial-enclave-location below).
 
 During the manufacturing process, once the components have been soldered to the board, the system is usually put through a system-level test.
-This is often done on as a "bed-of-nails" test {{BedOfNails}}, where the board has key points attached mechanically to a test system.
+This is often done as a "bed-of-nails" test {{BedOfNails}}, where the board has key points attached mechanically to a test system.
 A {{JTAG}} process tests the System Under Test, and then initializes some firmware into the still empty flash storage.
 
 It is now common for a factory test image to be loaded first: this image will include code to initialize the private memory key described above, and will include a first-stage bootloader and some kind of (primitive) Trusted Application Manager (TAM).
-(The TAM is a piece of software that lives within the trusted execution environment)
+(The TAM is a piece of software that lives within the trusted execution environment.)
 
 Embedded in the stage one bootloader will be a Trust Anchor that is able to verify the second-stage bootloader image.
 
@@ -297,20 +302,18 @@ The production image may be installed at that time, or if the second-stage bootl
 
 There are many variations of the above process, and this section is not attempting to be prescriptive, but to be provide enough illustration to motivate subsequent terminology.
 
-There process may be entirely automated, or it may be entirely driven by humans working in the factory.
-
-Or a combination of the above.
+The process may be entirely automated, or it may be entirely driven by humans working in the factory, or a combination of the above.
 
 These steps may all occur on an access-controlled assembly line, or the system boards may be shipped from one place to another (maybe another country) before undergoing testing.
 
 Some systems are intended to be shipped in a tamper-proof state, but it is usually not desirable that bed-of-nails testing be possible without tampering, so the initialization process is usually done prior to rendering the system tamper-proof.
-An example of a one-way tamper-proof, weather resistant treatment might to mount the system board in a plastic case and fill the case with resin.
+An example of a one-way tamper-proof, weather resistant treatment might to mount the system board in a case and fill the case with resin.
 
 Quality control testing may be done prior to as well as after the application of tamper-proofing, as systems which do not pass inspection may be reworked to fix flaws, and this should ideally be impossible once the system has been made tamper-proof.
 
 # Types of Trust Anchors
 
-Trust Anchors (TrAnc) are fundamentally public keys with authorizations implicitely attached through the code that references them.
+Trust Anchors (TrAnc) are fundamentally public keys with authorizations implicitly attached through the code that references them.
 
 They are used to validate other digitally signed artifacts.
 Typically, these are chains of PKIX certificates leading to an End-Entity certificate (EE).
@@ -361,7 +364,7 @@ In this situation the application code is not in a secured boot situation, as th
 
 ## Trusted Application Manager anchor
 
-This anchor the secure key for the {{I-D.ietf-teep-architecture}} Trusted Application Manager (TAM).
+This anchor has(?) the secure key for the {{I-D.ietf-teep-architecture}} Trusted Application Manager (TAM).
 Code which is signed by this anchor will be given execution privileges as described by the manifest which accompanies the code.
 This privilege may include updating anchors.
 
@@ -371,18 +374,18 @@ These anchors are used to verify HTTPS certificates from web sites.
 These anchors are typically distributed as part of desktop browsers, and via desktop operating systems.
 
 The exact set of these anchors is not precisely defined: it is usually determined by the browser vendor (e.g., Mozilla, Google, Apple, Safari, Microsoft), or the operating system vendor (e.g., Apple, Google, Microsoft, Ubuntu).
-In most cases these vendors look to the CA/Browser Forum ({{CABFORUM}}) for inclusion criteria.
+In most cases these vendors look to the CA/Browser Forum {{CABFORUM}} for inclusion criteria.
 
 ## DNSSEC root
 
 This anchor is part of the DNS Security extensions.
 It provides an anchor for securing DNS lookups.
 Secure DNS lookups may be important in order to get access to software updates.
-This anchor is now scheduled to change approximately every 3 years, with the new key announced several years before it is used, making it possible to embed a keys that
+This anchor is now scheduled to change approximately every 3 years, with the new key announced several years before it is used, making it possible to embed keys that
 will be valid for up to five years.
 
 This trust anchor is typically part of the application/operating system code and is usually updated by the manufacturer when they do updates.
-However, a system which is connected to the Internet may update the DNSSEC anchor itself through the mechanism described in {{RFC5011}}.
+However, a system that is connected to the Internet may update the DNSSEC anchor itself through the mechanism described in {{RFC5011}}.
 
 There are concerns that there may be a chicken and egg situation for devices that have remained in a powered off state (or disconnected from the Internet) for some period of years.
 That upon being reconnected, that the device would be unable to do DNSSEC validation.
@@ -457,7 +460,7 @@ mechanism.
 
 Generating the key on-device has the advantage that the private key never leaves the device.
 The disadvantage is that the device may not have a verified random number generator.
-{{factoringrsa}} is an example of this scenario.
+{{factoringrsa}} is an example of a successful attack on this scenario.
 
 There are a number of options of how to get the public key securely from the
 device to the certification authority.
@@ -467,14 +470,14 @@ The serial number goes into the certificate, and the resulting certificate needs
 
 One way to do the transmission is during a factory Bed of Nails test (see {{BedOfNails}}) or Boundary Scan.
 When done via a physical connection like this, then this is referred to as a
-_device-generated_ / _mechanically-transferred_ .
+_device-generated_ / _mechanically-transferred_ method.
 
 There are other ways that could be used where a certificate signing request is sent over a special network channel when the device is powered up in the factory.
-This is referrered to as the _device-generated_ / _network-transferred_  method.
+This is referred to as the _device-generated_ / _network-transferred_  method.
 
 Regardless of how the certificate signing request is sent from the device to the factory, and how the certificate is returned to the device, a concern from production line managers is that the assembly line may have to wait for the certification authority to respond with the certificate.
 
-After the key generation, the device needs to set a flag such that it no longer generates a new key, or will accept a new IDevID via the factory connection.
+After the key generation, the device needs to set a flag such that it no longer will generate a new key / will accept a new IDevID via the factory connection.
 This may be a software setting, or could be as dramatic as blowing a fuse.
 
 The risk is that if an attacker with physical access is able to put the device back into an unconfigured mode, then the attacker may be able to substitute a new certificate into the device.
@@ -499,7 +502,7 @@ The major downside to generating the private key off-device is that it could be 
 It could be compromised by humans in the factory, or the equipment could be compromised.
 The use of this method increases the value of attacking the manufacturing infrastructure.
 
-If keys are generated by the manufacturing plant, and are immediately installed, but never stored, then the window in which an attacker can gain access to the private key is immensely reduced.
+If private keys are generated by the manufacturing plant, and are immediately installed, but never stored, then the window in which an attacker can gain access to the private key is immensely reduced.
 
 As in the previous case, the transfer may be done via physical interfaces such as bed-of-nails, giving the _infrastructure-generated_ / _mechanically-transferred_ method.
 
@@ -507,7 +510,7 @@ There is also the possibility of having a _infrastructure-generated_ / _network-
 key.
 There is a support for "server-generated" keys in {{RFC7030}}, {{-SCEP}}, and {{-CMP}}.
 All methods strongly recommend encrypting the private key for transfer.
-This is difficult to comply with as there is not yet any private key material in the device, so in many cases it will not be possible to encrypt the private key.
+This is difficult to comply with here as there is not yet any private key material in the device, so in many cases it will not be possible to encrypt the private key.
 
 
 #### Key setup based on 256 bit secret seed
@@ -529,6 +532,7 @@ The secret seed must be created in a secure way and it must also be communicated
 There are some advantages to the OEM however: the major one is that the problem of securely communicating with the device is outsourced to the silicon vendor.
 The private keys and certificates may be calculated by the OEM asynchronously to the manufacturing process, either done in batches in advance of actual manufacturing, or on demand when an IDevID is demanded.
 Doing the processing in this way permits the key derivation system to be completely disconnected from any network, and requires placing very little trust in the system assembly factory.
+<!-- FIXME: What? -->
 Operational security such as often incorrectly presented fictionalized stories of a "mainframe" system to which only physical access is permitted begins to become realistic.
 That trust has been replaced with a heightened trust placed in the silicon (integrated circuit) fabrication facility.
 
@@ -540,18 +544,18 @@ There are some significant downsides to keeping that secret seed around.
 
 {{RFC5280}} describes the format for certificates, and numerous mechanisms
 for doing enrollment have been defined (including: EST {{RFC7030}}, CMP {{RFC4210}},
-SCEP {{I-D.gutmann-scep}}).
+SCEP {{-SCEP}}).
 
 {{RFC5280}} provides mechanisms to deal with multi-level certification
 authorities, but it is not always clear what operating rules apply.
 
-The certification authority (CA) that is central to {{RFC5280}}-style public key infrastructures can suffer two kinds of failures:
+The certification authority (CA) that is central to {{RFC5280}}-style public key infrastructures can suffer three kinds of failures:
 
-1. disclosure of a private key.
+1. disclosure of a private key,
 
-2. loss of a private key.
+2. loss of a private key,
 
-3. inappropriate signing of a certificate from an unauthorized source
+3. inappropriate signing of a certificate from an unauthorized source.
 
 A PKI which discloses one or more private certification authority keys is no
 longer secure.
@@ -560,11 +564,11 @@ An attacker can create new identities, and forge certificates connecting
 existing identities to attacker controlled public/private keypairs.
 This can permit the attacker to impersonate any specific device.
 
-There is an additional kind of failure is when the CA is convinced to sign (or issue) a certificate which it is not authorized to do so.
+There is an additional kind of failure when the CA is convinced to sign (or issue) a certificate which it is not authorized to do so.
 See for instance {{ComodoGate}}.
 This is an authorization failure, and while a significant event, it does not result in the CA having to be re-initialized from scratch.
 
-This is disintinguished from a loss as described above renders the CA completely useless and likely requires a recall of all products that have ever had IDevID issued from this CA.
+This is distinguished from when a loss as described above renders the CA completely useless and likely requires a recall of all products that have ever had an IDevID issued from this CA.
 
 If the PKI uses Certificate Revocation Lists (CRL)s, then an attacker that has access to the private key can also revoke existing identities.
 
@@ -578,15 +582,15 @@ authorities.
 
 ## Number of levels of certification authorities
 
-{{RFC5280}}, section 6.1 provides a Basic Path Validation.
+{{Section 6.1 of RFC5280}} provides a Basic Path Validation.
 In the formula, the certificates are arranged into a list.
 
-The certification authority (CA) starts with a Trust Anchor (TA).
+The certification authority (CA) starts with a Trust Anchor (TrAnc).
 This is counted as the first level of the authority.
 
 In the degenerate case of a self-signed certificate, then this a one level PKI.
 
-~~~~
+~~~~ goat
 {::include self-signed.txt}
 ~~~~
 
@@ -594,15 +598,15 @@ The private key associated with the Trust Anchor signs one or more certificates.
 When this first level authority trusts only End-Entity (EE) certificates,
 then this is a two level PKI.
 
-~~~~
+~~~~ goat
 {::include two-level.txt}
 ~~~~
 
-When this first level authority signs suborbinate certification authorities,
+When this first level authority signs subordinate certification authorities,
 and those certification authorities sign End-Entity certificates, then
 this is a three level PKI.
 
-~~~~
+~~~~ goat
 {::include three-level.txt}
 ~~~~
 
@@ -610,8 +614,8 @@ In general, when arranged as a tree, with the End-Entity certificates at the
 bottom, and the Trust Anchor at the top, then the level is where the deepest EE
 certificates are, counting from one.
 
-It is quite common to have a three level PKI, where the root of the CA is
-stored in a Hardware Security Module, while the level one suborbinate CA is
+It is quite common to have a three-level PKI, where the root of the CA is
+stored in a Hardware Security Module, while the level one subordinate CA is
 available in an online form.
 
 ## Protection of CA private keys
@@ -619,7 +623,7 @@ available in an online form.
 The private key for the certification authorities must be protected from
 disclosure.
 The strongest protection is afforded by keeping them in a offline device,
-passing Certificate Signing Requests (CSR)s to the offline device by human
+passing Certificate Signing Requests (CSRs) to the offline device by human
 process.
 
 For examples of extreme measures, see {{kskceremony}}.
@@ -631,7 +635,7 @@ to months if the offline device is kept in a locked environment that requires
 multiple keys to be present.
 
 There is therefore a tension between protection and convenience.
-This is often accomplished by having some levels of the PKI be offline, and
+This is often mitigated by having some levels of the PKI be offline, and
 some levels of the PKI be online.
 
 There is usually a need to maintain backup copies of the critical keys.
@@ -647,7 +651,7 @@ devices need to be signed by a certification authority maintained by the manufac
 During the period of manufacture of new product, the manufacturer needs to be be able to sign new Identity Certificates.
 
 During the anticipated lifespan of the devices the manufacturer needs to maintain the ability for third parties to validate the Identity Certificates.
-If there are Certificate Revocation Lists (CRLs) involved, then they will need to resigned during this period.
+If there are Certificate Revocation Lists (CRLs) involved, then they will need to re-signed during this period.
 Even for devices with a short active lifetime, the lifespan of the device could very long if devices are kept in a warehouse for many decades before being activated.
 
 Trust anchors which are provisioned in the devices will have corresponding
@@ -655,9 +659,9 @@ private keys maintained by the manufacturer.
 The trust anchors will often anchor a PKI which is going to be used for a
 particular purpose.
 There will be End-Entity (EE) certificates of this PKI which will be used to sign
-particular artifacts (such as software updates), or communications protocols
+particular artifacts (such as software updates), or messages in communications protocols
 (such as TLS connections).
-The private key associated with these EE certificates are not stored in the
+The private keys associated with these EE certificates are not stored in the
 device, but are maintained by the manufacturer.
 These need even more care than the private keys stored in the devices, as
 compromise of the software update key compromises all of the devices, not
@@ -675,7 +679,7 @@ initial-enclave-location:
 Some systems have a software verification public key which is built into the CPU package, while other systems store that initial key in a non-volatile device external to the CPU.
 
 initial-enclave-integrity-key:
-: If the first-stage bootloader is external to the CPU, and it is integrity protected, where is the key used to check the integrity?
+: If the first-stage bootloader is external to the CPU, and if it is integrity protected, where is the key used to check the integrity?
 
 initial-enclave-privacy-key:
 : If the first-stage data is external to the CPU, is it kept confidential by use of encryption?
@@ -745,7 +749,7 @@ many yet to be detailed
 
 # Security Considerations
 
-This entire document is a security considerations.
+This entire document is about security considerations.
 
 # IANA Considerations
 
