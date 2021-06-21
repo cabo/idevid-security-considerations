@@ -759,6 +759,7 @@ This document makes no IANA requests.
 # Acknowledgements
 
 Robert Martin of MITRE provided some guidance about citing the SBOM efforts.
+Carsten Borman provides many editorial suggestions.
 
 # Changelog
 
