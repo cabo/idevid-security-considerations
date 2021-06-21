@@ -1,9 +1,11 @@
-.----------.<-.   
-|Issuer= X |  |   root 
-|Subject=X |--'    CA
-'----------'
-   |     \-------\
-   v             |
+.----------.<-.
+|Issuer= X |  |   root
+|Subject=X +--'    CA
+'--+-----+-'
+   |     |
+   |     '-------.
+   |             |
+   v             v
 .----EE----.    .----EE----.
 |Issuer= X |    |Issuer= X |
 |Subject=Y1|    |Subject=Y2|
