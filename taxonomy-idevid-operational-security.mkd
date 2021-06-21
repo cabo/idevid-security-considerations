@@ -31,7 +31,7 @@ normative:
     date: 2009
 
 informative:
-  I-D.ietf-anima-bootstrapping-keyinfra: BRSKI
+  RFC8995: BRSKI
   I-D.richardson-anima-voucher-delegation:
   I-D.friel-anima-brski-cloud:
   I-D.ietf-anima-constrained-voucher:
@@ -213,7 +213,7 @@ Trust anchors are used to verify:
 
 * the {{RFC8366}} format voucher that provides proof of an ownership change.
 
-Device identity keys are used when performing enrollment requests (in {{I-D.ietf-anima-bootstrapping-keyinfra}}, and in some uses of {{?I-D.ietf-emu-eap-noob}}.
+Device identity keys are used when performing enrollment requests (in {{-BRSKI}}, and in some uses of {{?I-D.ietf-emu-eap-noob}}.
 The device identity certificate is also used to sign Evidence by an Attesting Environment (see {{?I-D.ietf-rats-architecture}}).
 
 These security artifacts are used to anchor other chains of information: an EAT Claim as to the version of software/firmware running on a device ({{?I-D.birkholz-suit-coswid-manifest}}), an EAT claim about legitimate network activity (via {{?I-D.birkholz-rats-mud}}, or embedded in the IDevID in {{?RFC8520}}).
@@ -414,7 +414,7 @@ The process of making this coordinated key pair and then installing it into the 
 
 A number of protocols depend upon this certificate.
 
-* {{RFC8572}} and {{I-D.ietf-anima-bootstrapping-keyinfra}} introduce mechanisms for new devices (called pledges) to be onboarded into a network without intervention from an expert operator. A number of derived protocols such as {{I-D.ietf-anima-brski-async-enroll}},                {{I-D.ietf-anima-constrained-voucher}}, {{I-D.richardson-anima-voucher-delegation}}, {{I-D.friel-anima-brski-cloud}} extend this in a number of ways.
+* {{RFC8572}} and {{-BRSKI}} introduce mechanisms for new devices (called pledges) to be onboarded into a network without intervention from an expert operator. A number of derived protocols such as {{I-D.ietf-anima-brski-async-enroll}},                {{I-D.ietf-anima-constrained-voucher}}, {{I-D.richardson-anima-voucher-delegation}}, {{I-D.friel-anima-brski-cloud}} extend this in a number of ways.
 
 * {{I-D.ietf-rats-architecture}} depends upon a key provisioned into the Attesting Environment to sign Evidence.
 
