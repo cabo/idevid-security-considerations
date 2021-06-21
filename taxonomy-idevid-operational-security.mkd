@@ -365,7 +365,7 @@ In this situation the application code is not in a secured boot situation, as th
 
 ## Trusted Application Manager anchor
 
-This anchor has(?) the secure key for the {{I-D.ietf-teep-architecture}} Trusted Application Manager (TAM).
+This anchor is the secure key for the {{I-D.ietf-teep-architecture}} Trusted Application Manager (TAM).
 Code which is signed by this anchor will be given execution privileges as described by the manifest which accompanies the code.
 This privilege may include updating anchors.
 
