@@ -45,7 +45,7 @@ informative:
   RFC8894: SCEP
   RFC4210: CMP
   3GPP.51.011:
-
+  RFC6024:
   BedOfNails:
     title: "In-circuit test"
     author:
@@ -189,6 +189,7 @@ RFCEDITOR: please remove this paragraph. This work is occurring in https://githu
 An increasing number of protocols derive a significant part of their security by using trust anchors {{RFC4949}} that are installed by manufacturers.
 Disclosure of the list of trust anchors does not usually cause a problem, but changing them in any way does.
 This includes adding, replacing or deleting anchors.
+{{RFC6024}} deals with how trust anchor stores are managed, while this document deals with how the associated PKI which is anchor is managed.
 
 Many protocols also leverage manufacturer installed identities.
 These identities are usually in the form of {{ieee802-1AR}} Initial Device Identity certificates (IDevID).
