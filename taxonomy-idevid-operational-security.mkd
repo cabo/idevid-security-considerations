@@ -583,7 +583,7 @@ authorities.
 
 ## Number of levels of certification authorities
 
-{{Section 6.1 of RFC5280}} provides a Basic Path Validation.
+Section 6.1 of {{RFC5280}} provides a Basic Path Validation.
 In the formula, the certificates are arranged into a list.
 
 The certification authority (CA) starts with a Trust Anchor (TrAnc).
