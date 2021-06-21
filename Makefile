@@ -17,7 +17,6 @@ ${DRAFT}-${VERSION}.txt: ${DRAFT}.txt
 	unset DISPLAY; XML_LIBRARY=$(XML_LIBRARY):./src xml2rfc --html -o $@ $?
 
 submit: ${DRAFT}.xml
-	xml2rfc --v2v3 ${DRAFT}.xml
 	curl -S -F "user=mcr+ietf@sandelman.ca" -F "xml=@${DRAFT}.v2v3.xml" https://datatracker.ietf.org/api/submit
 
 version:
