@@ -6,7 +6,7 @@ ${DRAFT}-${VERSION}.txt: ${DRAFT}.txt
 	cp ${DRAFT}.txt ${DRAFT}-${VERSION}.txt
 
 %.xml: %.mkd
-	kramdown-rfc2629 ${DRAFT}.mkd >${DRAFT}.xml
+	kramdown-rfc2629 -3 ${DRAFT}.mkd >${DRAFT}.xml
 	unset DISPLAY; XML_LIBRARY=$(XML_LIBRARY):./src xml2rfc --v2v3 ${DRAFT}.xml
 	mv ${DRAFT}.v2v3.xml ${DRAFT}.xml
 
@@ -17,7 +17,7 @@ ${DRAFT}-${VERSION}.txt: ${DRAFT}.txt
 	unset DISPLAY; XML_LIBRARY=$(XML_LIBRARY):./src xml2rfc --html -o $@ $?
 
 submit: ${DRAFT}.xml
-	curl -S -F "user=mcr+ietf@sandelman.ca" -F "xml=@${DRAFT}.v2v3.xml" https://datatracker.ietf.org/api/submit
+	curl -S -F "user=mcr+ietf@sandelman.ca" -F "xml=@${DRAFT}.xml" https://datatracker.ietf.org/api/submit
 
 version:
 	echo Version: ${VERSION}
