@@ -1,7 +1,7 @@
 ---
 title: A Taxonomy of operational security considerations for manufacturer installed keys and Trust Anchors
 abbrev: IDevID Considerations
-docname: draft-richardson-t2trg-idevid-considerations-07
+docname: draft-richardson-t2trg-idevid-considerations-08
 
 ipr: trust200902
 wg: T2TRG Research Group
