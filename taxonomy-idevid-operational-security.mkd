@@ -636,14 +636,53 @@ to months if the offline device is kept in a locked environment that requires
 multiple keys to be present.
 
 There is therefore a tension between protection and convenience.
-This is often mitigated by having some levels of the PKI be offline, and
-some levels of the PKI be online.
+Convenient and timely access to sign new artifacts is not something that is just nice to have.
+If access is inconvenient then it may cause delays for signing of new code releases,
+or it may incentivize technical staff to build in work arounds in order that they can get their job done faster.
+The compromise between situations is often mitigated by having some levels of the PKI be offline, and some levels of the PKI be online.
 
-There is usually a need to maintain backup copies of the critical keys.
-It is often appropriate to use secret splitting technology such as Shamir
-Secret Sharing among a number of parties {{shamir79}}
-This mechanism can be setup such that some threshold k (less than the total
-n) of shares are needed in order to recover the secret.
+## Preservation of CA and Trust Anchor private keys
+
+A public key (or certificate) is installed into target device(s) as a trust anchor.
+Is it there in order to verify further artifacts, and it represents a significant investment.
+Trust anchors must not be easily replaced by attackers, and securing the trust anchor against such tampering may involve burning the trust anchor into unchangeable fuses inside a CPU.
+
+Replacement of the anchor can involve a physical recall of every single device.
+It therefore important that the trust anchor is useable for the entire lifetime of every single one of the devices.
+
+The previous section deals with attacks against the infrastructure: the attacker wants to get access to the private key material, or to convince the infrastructure to use the private key material to their bidding.
+Such an event, if undetected would be catastrosphic.
+But, when detected, would render almost every device useless (or potentially dangerous) until the anchor could be replaced.
+
+There is a different situation, however, which would lead to a similiar result.
+If the legitimate owner of the trust anchor infrastructure loses access the private keys, then an equally catastrophic situation occurs.
+
+There are many situations that could lead to this.
+The most typical situation would seem to be some kind of physical damage: a flood, a fire.
+Less obvious situations could occur if a human forgets a password, or if the human with the password(s) dies, or becomes incapacited.
+
+Backups of critical material is routinely done.
+Storage of backups offsite deals with physical damage, and in many cases the organization maintains an entire set of equipment at another location.
+
+The question then becomes: how are the backups unlocked, or activated.
+Why attack the primary site physically if an attacker can target the backup site, or the people whose job it is to activate the backup site?
+
+Consider the situation where a hurricane or earthquake takes out all power and communications at an organizations' primary location,  and it becomes necessary to activate the backup site.
+What does it take to do that?
+
+Typically the secrets will be split using {{shamir79}} into multiple pieces, each piece being carried with a different trusted employee.
+In {{kskceremony}}, the pieces are stored on smartcards which are kept in a vault, and the trusted people carry keys to the vault.
+One advantage of this mechanism is that if necessary, the doors to the vault can be drilled out.
+This takes some significant time and leaves significant evidence, so it can not be done quietly by an attacker.
+In the case of the DNSSEC Root, a failure of the vault to open actually required this to be done.
+
+{{shamir79}} allows for keys to be split up into n-components, where only some smaller number of them, k, need to be present to reconstruct the secret.
+
+The choice of n, and the choice of k is therefore of critical concern.
+It seems unlikely that many organizations will want to publish them.
+The identities of the n people should also be confidential in order to reduce concerns about coercion against those people.
+The number k, which is the minimum number of people that would need to be coerced should also remain confidential.
+
 
 ## Supporting provisioned anchors in devices
 
