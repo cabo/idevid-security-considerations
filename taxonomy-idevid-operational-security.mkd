@@ -591,7 +591,7 @@ This is counted as the first level of the authority.
 
 In the degenerate case of a self-signed certificate, then this a one level PKI.
 
-~~~~ goat
+~~~~ aasvg
 {::include self-signed.txt}
 ~~~~
 
@@ -599,7 +599,7 @@ The private key associated with the Trust Anchor signs one or more certificates.
 When this first level authority trusts only End-Entity (EE) certificates,
 then this is a two level PKI.
 
-~~~~ goat
+~~~~ aasvg
 {::include two-level.txt}
 ~~~~
 
@@ -607,7 +607,7 @@ When this first level authority signs subordinate certification authorities,
 and those certification authorities sign End-Entity certificates, then
 this is a three level PKI.
 
-~~~~ goat
+~~~~ aasvg
 {::include three-level.txt}
 ~~~~
 
