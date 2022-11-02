@@ -438,7 +438,7 @@ The process of making this coordinated key pair and then installing it into the 
 
 ## Manufacturer installed IDevID certificates
 
-{{ieee802-1AR}} defines a category of certificates that are installed by the manufacturer which contain  a device unique serial number.
+{{ieee802-1AR}} defines a category of certificates that are installed by the manufacturer which contain a device unique serial number.
 
 A number of protocols depend upon this certificate.
 
