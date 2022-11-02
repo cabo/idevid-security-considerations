@@ -644,7 +644,7 @@ bottom, and the Trust Anchor at the top, then the level is where the deepest EE
 certificates are, counting from one.
 
 It is quite common to have a three-level PKI, where the root (level one) of the CA is
-stored offline in a Hardware Security Module, while the level two subordinate CA must be adequately secured, but must still be available in an online form.
+stored in a Hardware Security Module in a way that it cannot be continuously accessed ("offline"), while the level two subordinate CA can sign certificates at any time ("online").
 
 ## Protection of CA private keys
 
