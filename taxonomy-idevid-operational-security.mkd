@@ -794,7 +794,7 @@ infrastructure that anchors this identity must be maintained by the
 manufacturer.
 
 identity-pki-level:
-: how deep are the IDevID certificates that are issued?
+: referring to {{pkilevel}}, the level number at which End-Entity certificates are present.
 
 identity-time-limits-per-subordinate:
 : how long is each subordinate CA maintained before a new
@@ -806,7 +806,16 @@ identity-number-per-subordinate:
 retired?  There may be no numeric limit, only a time limit.
 
 identity-anchor-storage:
-: how is the root CA key stored?  How many people are needed to recover the private key?
+: how is the root CA key stored? An open description that might include whether an HSM is used, or not, or even the model of it.
+
+identity-shared-split-extra:
+: referring to {{splittingnumbers}}, where a private key is split up into n-components, of which k are required to recover the key, this number is n-k.
+This is the number of spare shares.
+Publishing this provides a measure of how much redundancy is present while not actually revealing either k or n.
+
+identity-shared-split-continents:
+: the number of continents on which the private key can be recovered without travel by any of the secret share holders
+
 
 ## Integrity and Privacy of included trust anchors
 
