@@ -715,9 +715,25 @@ This is known as a (k, n) threshold scheme.
 In this document, each of the people who hold a piece of the secret are referred to as Key Executives.
 
 The choice of n, and the choice of k is therefore of critical concern.
-It seems unlikely that many organizations will want to publish them.
-The identities of the n people should also be confidential in order to reduce concerns about coercion against those people.
+It seems unwise for an organizations to publish them, as it provides some evidence as to how many Key Executives would need to be coerced.
+
+The identities of the n Key Executive should also be confidential.
+The list of who they are should probably be limited to the members of the board and executive.
+There does not seem to be any particular reason for the Key Executives to be members of the board, but having a long term relationship with the enterprise seems reasonable, and a clear understanding of when to use the piece.
+
 The number k, which is the minimum number of people that would need to be coerced should also remain confidential.
+
+A number that can be published is the difference between k and n, which represents the number of redundant Key Executives that exist.
+
+An enterprise that has operations in multiple places may be better positioned to survive  incidents that disrupt travel.
+For instance, an earthquake, tsunami, or pandemic not only has the possibility to kill Key Executives or the smartcard or USB key that they are stored on.
+{{shamir79}} suggests that n=2k-1, which implies that a simple majority of Key Executives are needed to reconstruct the secret, other values of k have some interesting advantages.
+
+A value of k set to be less than a simple majority, where the Key Executives are split between two or more continents (with each continent having at least k Key Executives) would allow either  continent to continue operations without the other group.
+
+This might be a very good way to manage a code signing or update signing key.
+Split it among development groups in three time zones (eight hours apart), such that any of those development groups can issue an emergency security patch.
+(Another way would be to have three End-Entity certificates that can sign code, and have each time zone sign their own code.  That implies that there is at least a level two PKI around the code signing process, and that any bootloaders that need to verify the code being starting it are able to do PKI operations)
 
 
 ## Supporting provisioned anchors in devices
