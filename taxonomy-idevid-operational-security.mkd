@@ -523,9 +523,9 @@ As the private key is available to the manufacturing infrastructure, the authent
 If the device does not come with a serial number in silicon, then one should be assigned and placed into a certificate.
 The private key and certificate could be programmed into the device along with the initial bootloader firmware in a single step.
 
-Aside from the change of origin for the randomness, a major advantage of this mechanism  is that it can be done with a single write to the flash.
-The entire firmware of the device, including configuration of trust anchors and private keys can be loaded in a single write pass.
-Given some pipelining of the generation of the keys and the creation of certificates, it may be possible to install unique identities without taking any additional time.
+As the private key can be known to the factory in advance of the device being ready for it, the certificate can also be generated in advance.
+This hides the latency to talk to the CA, and allows for the connectivity to the CA to be less reliable without shutting down the assembly line.
+A single write to the flash of the device can contain the entire firmware of the device, including configuration of trust anchors and private keys.
 
 The major downside to generating the private key off-device is that it could be seen by the manufacturing infrastructure.
 It could be compromised by humans in the factory, or the equipment could be compromised.
