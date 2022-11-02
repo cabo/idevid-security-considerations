@@ -776,13 +776,15 @@ initial-enclave-integrity-key:
 initial-enclave-privacy-key:
 : If the first-stage data is external to the CPU, is it kept confidential by use of encryption?
 
-first-stage-initialization:
-: The number of people involved in the first stage initialization. An entirely automated system would have a number zero.  A factory with three 8 hour shifts might have a number that is a multiple of three.  A system with humans involved may be subject to bribery attacks, while a system with no humans may be subject to attacks on the system which are hard to notice.
+first-stage-exposure:
+: The number of people involved in the first stage initialization.
+An entirely automated system would have a number zero.
+A factory with three 8 hour shifts might have a number that is a multiple of three.
+A system with humans involved may be subject to bribery attacks, while a system with no humans may be subject to attacks on the system which are hard to notice.
 
 first-second-stage-gap:
-: If a board is initialized with a first-stage bootloader in one location
-(factory), and then shipped to another location, there may situations where
-the device can not be locked down until the second step.
+: how far and long does a board travel between being initialized with a first-stage bootloader to where it is locked down so that changes to the bootloader can no longer be made.
+For many situations, there is no distance at all as they occur in the same factory, but for other situations boards are manufactured and tested in one location, but are initialized elsewhere.
 
 ## Integrity and Privacy of device identify infrastructure
 
