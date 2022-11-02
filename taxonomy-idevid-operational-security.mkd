@@ -698,12 +698,21 @@ Consider the situation where a hurricane or earthquake takes out all power and c
 What does it take to do that?
 
 Typically the secrets will be split using {{shamir79}} into multiple pieces, each piece being carried with a different trusted employee.
+
 In {{kskceremony}}, the pieces are stored on smartcards which are kept in a vault, and the trusted people carry keys to the vault.
+
 One advantage of this mechanism is that if necessary, the doors to the vault can be drilled out.
 This takes some significant time and leaves significant evidence, so it can not be done quietly by an attacker.
 In the case of the DNSSEC Root, a failure of the vault to open actually required this to be done.
 
+In other systems the digital pieces are carried on the person themselves, ideally encrypted with a password known only to that person.
+
 {{shamir79}} allows for keys to be split up into n-components, where only some smaller number of them, k, need to be present to reconstruct the secret.
+This is known as a (k, n) threshold scheme.
+
+### Secret splitting, k-of-n {#splittingnumbers}
+
+In this document, each of the people who hold a piece of the secret are referred to as Key Executives.
 
 The choice of n, and the choice of k is therefore of critical concern.
 It seems unlikely that many organizations will want to publish them.
