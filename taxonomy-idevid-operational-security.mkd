@@ -91,7 +91,7 @@ informative:
     author:
       name: "Adi Shamir"
     date: 1979
-    target: "https://www.cs.jhu.edu/~sdoshi/crypto/papers/shamirturing.pdf"
+    target: "http://web.mit.edu/6.857/OldStuff/Fall03/ref/Shamir-HowToShareASecret.pdf"
 
   nistsp800-57:
     title: "SP 800-57 Part 1 Rev. 4 Recommendation for Key Management, Part 1: General"
