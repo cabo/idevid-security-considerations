@@ -189,7 +189,9 @@ RFCEDITOR: please remove this paragraph. This work is occurring in https://githu
 An increasing number of protocols derive a significant part of their security by using trust anchors {{RFC4949}} that are installed by manufacturers.
 Disclosure of the list of trust anchors does not usually cause a problem, but changing them in any way does.
 This includes adding, replacing or deleting anchors.
-{{RFC6024}} deals with how trust anchor stores are managed, while this document deals with how the associated PKI which is anchor is managed.
+
+The document {{RFC6024}} deals with how trust anchor stores are managed in the device which uses them.
+This document deals with how the PKI associated with such a trust anchor is managed.
 
 Many protocols also leverage manufacturer installed identities.
 These identities are usually in the form of {{ieee802-1AR}} Initial Device Identity certificates (IDevID).
@@ -392,9 +394,35 @@ There are concerns that there may be a chicken and egg situation for devices tha
 That upon being reconnected, that the device would be unable to do DNSSEC validation.
 This failure would result in them being unable to obtain operating system updates that would then include the updates to the DNSSEC key.
 
+## Private/Cloud PKI anchors
+
+It is common for many IoT and network appliances to have links to vendor provided services.
+For instance, the IoT device that calls home for control purposes, or the network appliance that needs to validate a license key before it can operate.
+(This may be identical to, or distinct from a Software Update anchor.  In particular, the device might call home over HTTPS to learn if there is a software update that needs to be done, but the update is signed by another key)
+
+Such vendor services can be provided with public certificates, but often the update policies such public anchors precludes their use in many operational environments.
+Instead a private PKI anchor is included.
+This can be in the form a multi-level PKI (as described in {{pkilevel}}), or degenerate to a level-1 PKI: a self-signed certificate.
+A level-1 PKI is very simple to create and operate, and there are innumerable situations where there is just a call to "curl" with the "--pinnedpubkey" option has been used.
+
+## Onboarding and other Enrollment anchors
+
+{{?RFC8995}}, {{?RFC8572}} and {{?RFC8366}} specifies a mechanism for onboarding of new devices.
+The voucher archifact is transfered to the device by different means, and the device must verify the signature on it.
+This requires a trust anchor to be built-in to the device, and some kind of private PKI be maintained by the vendor (or it's authorized designate).
+{{?I-D.anima-masa-considerations}} provides some advice on choices in PKI design for a MASA.
+The taxomony presented in this document apply to describing how this PKI has been designed.
+
+## Onboarded network-local anchors
+
+{{?RFC7030}}, {{?RFC8995}} and {{?I-D.ietf-netconf-trust-anchors}} provide mechanisms by which new trust anchors may be loaded by a device during an onboarding process.
+The trust anchors involved are typically local to an enterprise and are used to validate connections to other devices in the network.
+This typically includes connections to network management systems that may also load or modify other trust anchors in the system.
+{{?I-D.anima-masa-considerations}} provides some advice in the BRSKI ({{?RFC8995}}) case for appropriate PKI complexity for such local PKIs
+
 ## What else?
 
-TBD?
+what anchors are still missing?
 
 
 # Types of Identities
@@ -581,7 +609,7 @@ However, if CRLs or OCSP are in use, then the inability to sign a fresh CRL or O
 This section details some nomenclature about the structure of certification
 authorities.
 
-## Number of levels of certification authorities
+## Number of levels of certification authorities {#pkilevel}
 
 Section 6.1 of {{RFC5280}} provides a Basic Path Validation.
 In the formula, the certificates are arranged into a list.
