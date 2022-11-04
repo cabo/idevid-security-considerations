@@ -827,7 +827,7 @@ pki-level:
 : how deep is the EE that will be evaluated, based upon the criteria in {{pkilevel}}
 
 pki-algorithms:
-: what kind of algorithms and key sizes are actively used
+: what kind of algorithms and key sizes can actively be used with the device.
 
 pki-lifespan:
 : what is the timespan for this anchor.  Does it get replaced at some interval, and if so, by what means is this done?
