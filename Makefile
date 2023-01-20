@@ -16,8 +16,10 @@ ${DRAFT}-${VERSION}.txt: ${DRAFT}.txt
 %.html: %.xml
 	unset DISPLAY; XML_LIBRARY=$(XML_LIBRARY):./src xml2rfc --html -o $@ $?
 
+#REPLACES=-F "replaces=draft-richardson-t2trg-idevid-considerations"
+
 submit: ${DRAFT}.xml
-	curl -s -F "user=mcr+ietf@sandelman.ca" -F "replaces=draft-richardson-t2trg-idevid-considerations" -F "xml=@${DRAFT}.xml" https://datatracker.ietf.org/api/submission | jq
+	curl -s -F "user=mcr+ietf@sandelman.ca" ${REPLACES} -F "xml=@${DRAFT}.xml" https://datatracker.ietf.org/api/submission | jq
 
 version:
 	echo Version: ${VERSION}
