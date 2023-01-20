@@ -1,4 +1,4 @@
-DRAFT:=taxonomy-idevid-operational-security
+DRAFT:=taxomony-manufacturer-anchors
 VERSION:=$(shell ./getver ${DRAFT}.mkd )
 EXAMPLES=
 
@@ -17,7 +17,7 @@ ${DRAFT}-${VERSION}.txt: ${DRAFT}.txt
 	unset DISPLAY; XML_LIBRARY=$(XML_LIBRARY):./src xml2rfc --html -o $@ $?
 
 submit: ${DRAFT}.xml
-	curl -s -F "user=mcr+ietf@sandelman.ca" -F "xml=@${DRAFT}.xml" https://datatracker.ietf.org/api/submission | jq
+	curl -s -F "user=mcr+ietf@sandelman.ca" -F "replaces=draft-richardson-t2trg-idevid-considerations" -F "xml=@${DRAFT}.xml" https://datatracker.ietf.org/api/submission | jq
 
 version:
 	echo Version: ${VERSION}
