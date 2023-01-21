@@ -1,4 +1,4 @@
-DRAFT:=taxomony-manufacturer-anchors
+DRAFT:=taxonomy-manufacturer-anchors
 VERSION:=$(shell ./getver ${DRAFT}.mkd )
 EXAMPLES=
 
