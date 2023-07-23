@@ -1,7 +1,7 @@
 ---
 title: A Taxonomy of operational security considerations for manufacturer installed keys and Trust Anchors
 abbrev: manufacturer keys
-docname: draft-irtf-t2trg-taxonomy-manufacturer-anchors-00
+docname: draft-irtf-t2trg-taxonomy-manufacturer-anchors-01
 
 ipr: trust200902
 wg: T2TRG Research Group
@@ -247,7 +247,7 @@ This document is not a standards track document, and it does not make use of for
 
 This section will be expanded to include needed terminology as required.
 
-The words Trust Anchor are contracted to TrAnc rather than TA, in order not to confuse with {{I-D.ietf-teep-architecture}}'s "Trusted Application".
+The words Trust Anchor are contracted to TrAnc rather than TA, in order not to confuse with {{RFC9397}}'s "Trusted Application".
 
 This document defines a number of hyphenated terms, and they are summarized here:
 
@@ -286,7 +286,7 @@ As the BMC usually has complete access to the main CPU's memory, I/O hardware an
 ## A reference manufacturing/boot process
 
 In order to provide for immutability and privacy of the critical TrAnc and IDs, many CPU manufacturers will provide for some kind of private memory area which is only accessible when the CPU is in certain privileged states.
-See the Terminology section of {{I-D.ietf-teep-architecture}}, notably TEE, REE, and TAM, and also section 4, Architecture.
+See the Terminology section of {{RFC9397}}, notably TEE, REE, and TAM, and also section 4, Architecture.
 
 The private memory that is important is usually non-volatile and rather small.
 It may be located inside the CPU silicon die, or it may be located externally.
@@ -373,7 +373,7 @@ In this situation the application code is not in a secured boot situation, as th
 
 ## Trusted Application Manager anchor
 
-This anchor is the secure key for the {{I-D.ietf-teep-architecture}} Trusted Application Manager (TAM).
+This anchor is the secure key for the {{RFC9397}} Trusted Application Manager (TAM).
 Code which is signed by this anchor will be given execution privileges as described by the manifest which accompanies the code.
 This privilege may include updating anchors.
 
