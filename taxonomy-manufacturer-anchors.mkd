@@ -169,6 +169,13 @@ informative:
     title: "CA/Browser Forum Baseline Requirements for the Issuance and Management of Publicly-Trusted Certificates, v.1.7.3"
     date: October 2020
 
+  PUF:
+    target: "https://en.wikipedia.org/wiki/Physical_unclonable_function"
+    title: "Physically Uncloneable Function"
+    author:
+      org: "Wikipedia"
+    date: 2023-07-23
+
 --- abstract
 
 This document provides a taxonomy of methods used by manufacturers of silicon and devices
@@ -198,8 +205,7 @@ These identities are usually in the form of {{ieee802-1AR}} Initial Device Ident
 The identity has two components: a private key that must remain under the strict control of a trusted part of the device, and a public part (the certificate), which (ignoring, for the moment, personal privacy concerns) may be freely disclosed.
 
 There also situations where identities are tied up in the provision of symmetric shared secrets.
-<!-- FIXME: -->
-A common example is the SIM card ({{3GPP.51.011}}), it now comes as a virtual SIM, but which is usually not provisioned at the factory.
+A common example is the SIM card ({{3GPP.51.011}}): it now comes as a virtual SIM, which could in theory be factory provisioned.
 The provision of an initial, per-device default password also falls into the category of symmetric shared secret.
 
 It is further not unusual for many devices (particularly smartphones) to also have one or more group identity keys.
@@ -545,29 +551,29 @@ This is difficult to comply with here as there is not yet any private key materi
 #### Key setup based on 256 bit secret seed
 
 A hybrid of the previous two methods leverages a symmetric key that is often provided by a silicon vendor to OEM manufacturers.
+In this section there are two Original Equipment Manufacturer: the first is the familiar one that is responsible for the entire device, and the second one is the silicon vendor in which this symmetric seed key has been provisioned.
+This section calls the silicon vendor the Silicon-OEM.
 
-Each CPU (or a Trusted Execution Environment {{?I-D.ietf-teep-architecture}}, or a TPM) is provisioned at fabrication time with a unique, secret seed, usually at least 256 bits in size.
+In this process, the Silicom-OEM provisions a unique 256-bit secret into each device shipped.
+This can be via fuses blown in a CPU's Trusted Execution Environment {{?RFC9397}}, a TPM, or a Secure Element is provisioned at fabrication time with a unique, secret seed, usually at least 256 bits in size.
+In some cases, the secret is based upon a Physically Uncloneable Function {{PUF}}.
 
 This value is revealed to the OEM board manufacturer only via a secure channel.
-Upon first boot, the system (probably within a TEE, or within a TPM) will generate a key pair using the seed to initialize a Pseudo-Random-Number-Generator (PRNG).
+Upon first boot, the system (within a TEE, a TPM, or Secure Element) will generate a key pair using the same seed to initialize a Pseudo-Random-Number-Generator (PRNG).
 The OEM, in a separate system, will initialize the same PRNG and generate the same key pair.
 The OEM then derives the public key part, signs it and turns it into a certificate.
-The private part is then destroyed, ideally never stored or seen by anyone.
+The private part is then destroyed by the OEM, ideally never stored or seen by anyone.
+
 The certificate (being public information) is placed into a database, in some cases it is loaded by the device as its IDevID certificate, in other cases, it is retrieved during the onboarding process based upon a unique serial number asserted by the device.
 
-This method appears to have all of the downsides of the previous two methods: the device must correctly derive its own private key, and the OEM has access to the private key, making it also vulnerable.
-The secret seed must be created in a secure way and it must also be communicated securely.
+In some ways, this method appears to have all of the downsides of the previous two methods: the device  must correctly derive its own private key, and the OEM has access to the private key, making it also vulnerable.
+However, the OEM can do all of the private key manipulation in a secure place, offline, and never involve the actual physical factory.
+The security of the process rests upon the difficulty in extracting the seed provided by the Silicon-OEM.
+The Silicon-OEM must operate a factory that is more secure, but this removes much of the security concerns for the OEM's factory.
 
-There are some advantages to the OEM however: the major one is that the problem of securely communicating with the device is outsourced to the silicon vendor.
-The private keys and certificates may be calculated by the OEM asynchronously to the manufacturing process, either done in batches in advance of actual manufacturing, or on demand when an IDevID is demanded.
-Doing the processing in this way permits the key derivation system to be completely disconnected from any network, and requires placing very little trust in the system assembly factory.
-<!-- FIXME: What? -->
-Operational security such as often incorrectly presented fictionalized stories of a "mainframe" system to which only physical access is permitted begins to become realistic.
-That trust has been replaced with a heightened trust placed in the silicon (integrated circuit) fabrication facility.
+Additionally, there are some other advantages to the OEM: The private keys and certificates may be calculated by the OEM asynchronously to the manufacturing process, either done in batches in advance of actual manufacturing, or on demand when an IDevID is demanded.
 
-The downsides of this method to the OEM are: they must be supplied by a trusted silicon fabrication system, which must communicate the set of secrets seeds to the OEM in batches, and they OEM must store and care for these keys very carefully.
-There are some operational advantages to keeping the secret seeds around in some form, as the same secret seed could be used for other things.
-There are some significant downsides to keeping that secret seed around.
+There are downsides of this method for OEM: the cost is often higher, and may involve additional discrete parts.   The security has been outsourced to the OEM-silicon fabrication system.  The resulting seeds must be communicated to the OEM in batches, and they OEM must store and care for these keys very carefully.
 
 # Public Key Infrastructures (PKI)
 
