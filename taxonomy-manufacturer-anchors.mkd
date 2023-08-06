@@ -271,6 +271,8 @@ network-transferred:
 device/infrastructure-co-generated:
 : when a private or symmetric key is derived from a secret previously synchronized between the silicon vendor and the factory using a common algorithm.
 
+In addition, {{keygen}} introduces three primary private key generation techniques named *arbitrarily* after three vegetables (avocado, bamboo, and carrot) and two secondary ones named after two fruits (salak and sapodilla).
+The two secondary ones refer to methods where a secure element is involved, and mnemonically start with the same letter: S.
 
 # Applicability Model
 
@@ -465,11 +467,11 @@ a second key provisioned.
 
 * TBD
 
-### Operational Considerations for Manufacturer IDevID Public Key Infrastructure
+### Operational Considerations for Manufacturer IDevID Public Key generation {#keygen}
 
-The manufacturer has the responsibility to provision a key pair into each
+The OEM manufacturer has the responsibility to provision a key pair into each
 device as part of the manufacturing process.
-There are a variety of mechanisms to accomplish this, which this document will overview.
+There are a variety of mechanisms to accomplish this, which this section details.
 
 There are three fundamental ways to generate IDevID certificates for devices:
 
@@ -481,45 +483,55 @@ the installing both into the device.
 
 3. deriving the private key from a previously installed secret seed, that is shared with only the manufacturer.
 
-There is a fourth situation where the IDevID is provided as part of a Trusted
-Platform Module (TPM), in which case the TPM vendor may be making the same
-tradeoffs.
+There is additionally variations where the IDevID is provided as part of a Trusted Platform Module (TPM) or Secure Element (SE).
+The OEM vendor may purchase such devices from another vendor, and that vendor often offers provisioning of a key pair into the device as a service.
 
 The document {{I-D.moskowitz-ecdsa-pki}} provides some practical instructions
 on setting up a reference implementation for ECDSA keys using a three-tier
 mechanism.
 
-### Key Generation process
 
-#### On-device private key generation
+#### Avocado method: On-device private key generation
+
+In this method, the device generates a private key on the device.
+This is done within some very secure aspect of the device, such as in a Trusted Execution Environment, and the resulting private key is then stored in a secure and permanent way.
+The permanency may extend beyond use of on-CPU flash, and could even involve blowing of one-time fuses.
 
 Generating the key on-device has the advantage that the private key never leaves the device.
-The disadvantage is that the device may not have a verified random number generator.
+The disadvantage is that the device may not have a verifiable random number generator.
+The use of pseudo-random number generator needs to be well seeded as explained in {{?RFC4086}}.
 {{factoringrsa}} is an example of a successful attack on this scenario.
 
-There are a number of options of how to get the public key securely from the
-device to the certification authority.
+There are a number of options of how to get the public key from the device to the certification authority.
+As it is a public key, privacy is less of a concern, and the focus is on integrity.
+(However disclosing the public key may have impacts on trackability of the device)
 
-This transmission must be done in an integral manner, and must be securely associated with the assigned serial number.
-The serial number goes into the certificate, and the resulting certificate needs to be loaded into the manufacturer's asset database.
+So, transmission must be done in an integral manner, and must be securely associated with an assigned serial number.
+The serial number goes into the certificate, and the resulting certificate needs to be loaded into the manufacturer's asset database, and returned to the device to be stored as the IDevID certificate.
 
-One way to do the transmission is during a factory Bed of Nails test (see {{BedOfNails}}) or Boundary Scan.
+One way to do the transmission is during a factory Bed of Nails test (see {{BedOfNails}}) or JTAG Boundary Scan.
 When done via a physical connection like this, then this is referred to as a
-_device-generated_ / _mechanically-transferred_ method.
+_avocado device-generated_ / _mechanically-transferred_ method.
 
 There are other ways that could be used where a certificate signing request is sent over a special network channel when the device is powered up in the factory.
-This is referred to as the _device-generated_ / _network-transferred_  method.
+This is referred to as the _avocado device-generated_ / _network-transferred_  method.
 
 Regardless of how the certificate signing request is sent from the device to the factory, and how the certificate is returned to the device, a concern from production line managers is that the assembly line may have to wait for the certification authority to respond with the certificate.
+This is inherently a synchronous process, as the process can not start until the private key is generated and stored.
 
-After the key generation, the device needs to set a flag such that it no longer will generate a new key / will accept a new IDevID via the factory connection.
+After the key generation, the device needs to set a flag such that it no longer will generate a new key, and will not accept a new IDevID via the factory network connection.
 This may be a software setting, or could be as dramatic as blowing a fuse.
-
-The risk is that if an attacker with physical access is able to put the device back into an unconfigured mode, then the attacker may be able to substitute a new certificate into the device.
-It is difficult to construct a rationale for doing this, unless the network initialization also permits an attacker to load or replace trust anchors at the same time.
 
 Devices are typically constructed in a fashion such that the device is unable to ever disclose the private key via an external interface.
 This is usually done using a secure-enclave provided by the CPU architecture in combination with on-chip non-volatile memory.
+
+The risk is that if an attacker with physical access is able to put the device back into an unconfigured mode, then the attacker may be able to substitute a new certificate into the device.
+It is difficult to construct a rationale for doing this as the attacker would not be able to forge a certificate from the manufacturers' CA.
+Other parties that rely on the IDevID would see the device as an imposter if another CA was used.
+However, if the goal is theft of the device itself (without regard to having access to firmware updates), then  use of another manufacturer identity may be profitable.
+Stealing a very low value item, such as a light bulb makes very little sense.
+Stealing a medium value items, such as appliances, or high-value items such as cars, yachts or even airplanes would make sense.
+Replacing the manufacturer IDevID permits the attacker to also replace the authority to transfer ownership in protocols like {{-BRSKI}}.
 
 #### Off-device private key generation
 
