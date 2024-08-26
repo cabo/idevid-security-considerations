@@ -1,7 +1,7 @@
 ---
 title: A Taxonomy of operational security considerations for manufacturer installed keys and Trust Anchors
 abbrev: manufacturer keys
-docname: draft-irtf-t2trg-taxonomy-manufacturer-anchors-04
+docname: draft-irtf-t2trg-taxonomy-manufacturer-anchors-05
 
 ipr: trust200902
 wg: T2TRG Research Group
