@@ -1,7 +1,7 @@
 ---
 title: A Taxonomy of operational security considerations for manufacturer installed keys and Trust Anchors
 abbrev: manufacturer keys
-docname: draft-irtf-t2trg-taxonomy-manufacturer-anchors-06
+docname: draft-irtf-t2trg-taxonomy-manufacturer-anchors-07
 
 ipr: trust200902
 wg: T2TRG Research Group
@@ -434,11 +434,6 @@ The trust anchors involved are typically local to an enterprise and are used to 
 This typically includes connections to network management systems that may also load or modify other trust anchors in the system.
 {{?I-D.anima-masa-considerations}} provides some advice in the BRSKI ({{?RFC8995}}) case for appropriate PKI complexity for such local PKIs
 
-## What else?
-
-what anchors are still missing?
-
-
 # Types of Identities
 
 Identities are installed during manufacturing time for a variety of purposes.
@@ -470,8 +465,6 @@ ECDSA keys do not directly support encryption in the same way that RSA does, for
 instance, but the addition of ECIES can solve this.
 There may be other legal considerations why the IDevID might not be used, and
 a second key provisioned.
-
-* TBD
 
 ### Operational Considerations for Manufacturer IDevID Public Key generation {#keygen}
 
@@ -913,11 +906,6 @@ CAs needed that lead to the EE?
 
 pki-anchor-storage:
 : how is the private key associated with this trust root stored? How many people are needed to recover it?
-
-
-# Privacy Considerations
-
-many yet to be detailed
 
 # Security Considerations
 
