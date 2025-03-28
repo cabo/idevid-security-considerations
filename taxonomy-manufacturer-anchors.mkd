@@ -1,7 +1,7 @@
 ---
 title: A Taxonomy of operational security considerations for manufacturer installed keys and Trust Anchors
 abbrev: manufacturer keys
-docname: draft-irtf-t2trg-taxonomy-manufacturer-anchors-05
+docname: draft-irtf-t2trg-taxonomy-manufacturer-anchors-06
 
 ipr: trust200902
 wg: T2TRG Research Group
@@ -175,6 +175,12 @@ informative:
     author:
       org: "Wikipedia"
     date: 2023-07-23
+
+venue:
+  group: t2trg
+  mail: t2trg@irtf.org
+  github: git@github.com:mcr/idevid-security-considerations.git
+
 
 --- abstract
 
