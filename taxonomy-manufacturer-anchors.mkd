@@ -424,7 +424,7 @@ A level-1 PKI is very simple to create and operate, and there are innumerable si
 {{?RFC8995}}, {{?RFC8572}} and {{?RFC8366}} specifies a mechanism for onboarding of new devices.
 The voucher archifact is transfered to the device by different means, and the device must verify the signature on it.
 This requires a trust anchor to be built-in to the device, and some kind of private PKI be maintained by the vendor (or it's authorized designate).
-{{?I-D.anima-masa-considerations}} provides some advice on choices in PKI design for a MASA.
+{{?I-D.richardson-anima-masa-considerations}} provides some advice on choices in PKI design for a MASA.
 The taxomony presented in this document apply to describing how this PKI has been designed.
 
 ## Onboarded network-local anchors
