@@ -215,7 +215,7 @@ A common example is the SIM card ({{3GPP.51.011}}): it now comes as a virtual SI
 The provision of an initial, per-device default password also falls into the category of symmetric shared secret.
 
 It is further not unusual for many devices (particularly smartphones) to also have one or more group identity keys.
-This is used, for instance, in {{fidotechnote}} to make claims about being a particular model of phone (see {{?I-D.richardson-rats-usecases}}).
+This is used, for instance, in {{fidotechnote}} to make claims about being a particular model of phone.
 The key pair that does this is loaded into large batches of phones for privacy reasons.
 
 The trust anchors are used for a variety of purposes.
@@ -451,11 +451,11 @@ The process of making this coordinated key pair and then installing it into the 
 
 A number of protocols depend upon this certificate.
 
-* {{RFC8572}} and {{-BRSKI}} introduce mechanisms for new devices (called pledges) to be onboarded into a network without intervention from an expert operator. A number of derived protocols such as {{I-D.ietf-anima-brski-async-enroll}},                {{I-D.ietf-anima-constrained-voucher}}, {{I-D.richardson-anima-voucher-delegation}}, {{I-D.friel-anima-brski-cloud}} extend this in a number of ways.
+* {{RFC8572}} and {{-BRSKI}} introduce mechanisms for new devices (called pledges) to be onboarded into a network without intervention from an expert operator. A number of derived protocols such as {{I-D.ietf-anima-brski-async-enroll}},                {{I-D.ietf-anima-constrained-voucher}}, {{I-D.ietf-anima-brski-cloud}} extend this in a number of ways.
 
-* {{I-D.ietf-rats-architecture}} depends upon a key provisioned into the Attesting Environment to sign Evidence.
+* {{RFC9334}} depends upon a key provisioned into the Attesting Environment to sign Evidence.
 
-* {{I-D.ietf-suit-architecture}} may depend upon a key provisioned into the
+* {{RFC9019}} depends upon a key provisioned into the
   device in order to decrypt software updates.
 Both symmetric and asymmetric keys are possible.
 In both cases, the decrypt operation depends upon the device having access to
