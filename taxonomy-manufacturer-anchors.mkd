@@ -178,7 +178,7 @@ informative:
 venue:
   group: t2trg
   mail: t2trg@irtf.org
-  github: git@github.com:mcr/idevid-security-considerations.git
+  github: mcr/idevid-security-considerations
 
 
 --- abstract
@@ -192,7 +192,6 @@ manufacturer held private keys are secured against disclosure.
 This document does not evaluate the different mechanisms, but rather just
 serves to name them in a consistent manner in order to aid in communication.
 
-RFCEDITOR: please remove this paragraph. This work is occurring in https://github.com/mcr/idevid-security-considerations
 
 --- middle
 
