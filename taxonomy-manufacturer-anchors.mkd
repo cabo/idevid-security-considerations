@@ -25,6 +25,9 @@ normative:
     date: 2009
 
 informative:
+  RFC9334:
+  RFC9019:
+  I-D.ietf-anima-brski-cloud:
   RFC8995: BRSKI
   I-D.richardson-anima-voucher-delegation:
   I-D.friel-anima-brski-cloud:
@@ -40,16 +43,10 @@ informative:
   RFC4210: CMP
   3GPP.51.011:
   RFC6024:
-  BedOfNails:
-    title: "In-circuit test"
-    author:
-      org: "Wikipedia"
-    target: "https://en.wikipedia.org/wiki/In-circuit_test#Bed_of_nails_tester"
-    date: 2019-01-01
 
   pelionfcu:
     title: "Factory provisioning overview"
-    target:  https://www.pelion.com/docs/device-management-provision/1.2/introduction/index.html
+    target: https://www.pelion.com/docs/device-management-provision/1.2/introduction/index.html
     author:
       org: "ARM Pelion"
     date: 2020-06-28
@@ -133,7 +130,7 @@ informative:
     date: 2020-08-26
 
 # FIXME: Not used -- delete or reference?
-  JTAGieee:
+  JTAGieee: # DOI.10.1109/IEEESTD.2010.5412866
     target: "https://ieeexplore.ieee.org/document/5412866"
     title: "1149.7-2009 - IEEE Standard for Reduced-Pin and Enhanced-Functionality Test Access Port and Boundary-Scan Architecture"
     author:
@@ -149,12 +146,20 @@ informative:
       org: "ICANN"
     date: 2019
 
+# Removing duplicate:
+#  BedOfNails:
+#    title: "In-circuit test"
+#    author:
+#      org: "Wikipedia"
+#    target: "https://en.wikipedia.org/wiki/In-circuit_test#Bed_of_nails_tester"
+#    date: 2019-01-01
+
   BedOfNails:
-    target: "https://en.wikipedia.org/wiki/In-circuit_test#Bed_of_nails_tester"
+    target: "https://en.wikipedia.org/wiki/Bed_of_nails_tester"
     title: "Bed of nails tester"
     author:
       org: "Wikipedia"
-    date: 2020-07-01
+    date: 2024-12-30
 
   CABFORUM:
     target: "https://cabforum.org/wp-content/uploads/CA-Browser-Forum-BR-1.7.3.pdf"
