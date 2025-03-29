@@ -1,23 +1,17 @@
 ---
+v: 3
+
 title: A Taxonomy of operational security considerations for manufacturer installed keys and Trust Anchors
 abbrev: manufacturer keys
 docname: draft-irtf-t2trg-taxonomy-manufacturer-anchors-07
 
-ipr: trust200902
 wg: T2TRG Research Group
 kw: Internet-Draft
 cat: info
-stand_alone: true
-
-pi:
-  toc: yes
-  symrefs: yes
+stream: IRTF
 
 author:
-
-
-- ins: M. Richardson
-  name: Michael Richardson
+- name: Michael Richardson
   org: Sandelman Software Works
   email: mcr+ietf@sandelman.ca
 
