@@ -434,7 +434,7 @@ The taxonomy presented in this document applies to describing how this PKI has b
 {{RFC7030}}, {{RFC8995}} and {{?I-D.ietf-netconf-trust-anchors}} provide mechanisms by which new trust anchors may be loaded by a device during an onboarding process.
 The trust anchors involved are typically local to an enterprise and are used to validate connections to other devices in the network.
 This typically includes connections to network management systems that may also load or modify other trust anchors in the system.
-{{-masa-considerations}} provides some advice in the BRSKI ({{RFC8995}}) case for appropriate PKI complexity for such local PKIs.
+{{-masa-considerations}} provides some advice in the BRSKI {{RFC8995}} case for appropriate PKI complexity for such local PKIs.
 
 # Types of Identities
 
@@ -672,7 +672,7 @@ authorities.
 
 ## Number of levels of certification authorities (pkilevel) {#pkilevel}
 
-Section 6.1 of {{RFC5280}} provides a Basic Path Validation.
+{{Section 6.1 of RFC5280}} provides a Basic Path Validation.
 In the formula, the certificates are arranged into a list.
 
 The certification authority (CA) starts with a Trust Anchor (TrAnc).
