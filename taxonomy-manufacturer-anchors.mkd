@@ -25,14 +25,18 @@ normative:
     date: 2009
 
 informative:
-  RFC9334:
-  RFC9019:
-  I-D.ietf-anima-brski-cloud:
   RFC8995: BRSKI
-  I-D.richardson-anima-voucher-delegation:
-  I-D.friel-anima-brski-cloud:
-  I-D.ietf-anima-constrained-voucher:
-  I-D.ietf-anima-brski-async-enroll:
+  RFC9019: suit-architecture
+  RFC9140: noob
+  RFC9334: rats-architecture
+  RFC9393: coswid
+  RFC9733: async-enroll
+  I-D.ietf-anima-brski-cloud: cloud
+  I-D.ietf-iotops-7228bis-01: 7228bis
+# needed?:
+  I-D.ietf-anima-voucher-delegation: voucher-delegation
+  I-D.ietf-anima-constrained-voucher: constrained-voucher
+  I-D.richardson-anima-masa-considerations: masa-considerations
   I-D.moskowitz-ecdsa-pki:
   RFC4949:
   RFC5011:
@@ -178,7 +182,7 @@ informative:
 venue:
   group: t2trg
   mail: t2trg@irtf.org
-  github: mcr/idevid-security-considerations
+  github: t2trg/draft-irtf-t2trg-taxonomy-manufacturer-anchors
 
 
 --- abstract
@@ -209,7 +213,7 @@ These identities are usually in the form of {{ieee802-1AR}} Initial Device Ident
 The identity has two components: a private key that must remain under the strict control of a trusted part of the device, and a public part (the certificate), which (ignoring, for the moment, personal privacy concerns) may be freely disclosed.
 
 There also situations where identities are tied up in the provision of symmetric shared secrets.
-A common example is the SIM card ({{3GPP.51.011}}): it now comes as a virtual SIM, which could in theory be factory provisioned.
+A common example is the SIM card {{3GPP.51.011}}: it now comes as a virtual SIM, which could in theory be factory provisioned.
 The provision of an initial, per-device default password also falls into the category of symmetric shared secret.
 
 It is further not unusual for many devices (particularly smartphones) to also have one or more group identity keys.
@@ -219,18 +223,18 @@ The key pair that does this is loaded into large batches of phones for privacy r
 The trust anchors are used for a variety of purposes.
 Trust anchors are used to verify:
 
-* the signature on a software update (as per {{?I-D.ietf-suit-architecture}}),
+* the signature on a software update (as per {{-suit-architecture}}),
 
 * a TLS Server Certificate, such as when setting up an HTTPS connection,
 
 * the {{RFC8366}} format voucher that provides proof of an ownership change.
 
-Device identity keys are used when performing enrollment requests (in {{-BRSKI}}, and in some uses of {{?I-D.ietf-emu-eap-noob}}.
-The device identity certificate is also used to sign Evidence by an Attesting Environment (see {{?I-D.ietf-rats-architecture}}).
+Device identity keys are used when performing enrollment requests (in {{-BRSKI}}, and in some uses of {{-noob}}.
+The device identity certificate is also used to sign Evidence by an Attesting Environment (see {{-rats-architecture}}).
 
-These security artifacts are used to anchor other chains of information: an EAT Claim as to the version of software/firmware running on a device ({{?I-D.birkholz-suit-coswid-manifest}}), an EAT claim about legitimate network activity (via {{?I-D.birkholz-rats-mud}}, or embedded in the IDevID in {{?RFC8520}}).
+These security artifacts are used to anchor other chains of information: an EAT Claim as to the version of software/firmware running on a device {{?I-D.birkholz-suit-coswid-manifest}}, an EAT claim about legitimate network activity (via {{?I-D.birkholz-rats-mud}}, or embedded in the IDevID in {{?RFC8520}}).
 
-Known software versions lead directly to vendor/distributor signed Software Bill of Materials (SBOM), such as those described by {{?I-D.ietf-sacm-coswid}} and the NTIA/SBOM work {{ntiasbom}} and CISQ/OMG SBOM work underway {{cisqsbom}}.
+Known software versions lead directly to vendor/distributor signed Software Bill of Materials (SBOM), such as those described by {{-coswid}} and the NTIA/SBOM work {{ntiasbom}} and CISQ/OMG SBOM work underway {{cisqsbom}}.
 
 In order to manage risks and assess vulnerabilities in a Supply Chain, it is necessary to determine a degree of trustworthiness in each device.
 A device may mislead audit systems as to its provenance, about its software load or even about what kind of device it is (see {{?RFC7168}} for a humorous example).
@@ -281,7 +285,7 @@ The two secondary ones refer to methods where a secure element is involved, and 
 # Applicability Model
 
 There is a wide variety of devices to which this analysis can apply.
-(See {{?I-D.bormann-lwig-7228bis}}.)
+(See {{-7228bis}}.)
 This document will use a J-group processor as a sample.
 This class is sufficiently large to experience complex issues among multiple CPUs, packages and operating systems, but at the same time, small enough that this class is often deployed in single-purpose IoT-like uses.
 Devices in this class often have Secure Enclaves (such as the "Grapeboard"), and can include silicon manufacturer controlled processors in the boot process (the Raspberry PI boots under control of the GPU).
@@ -422,7 +426,7 @@ A level-1 PKI is very simple to create and operate, and there are innumerable si
 {{RFC8995}}, {{RFC8572}} and {{RFC8366}} specifies a mechanism for onboarding of new devices.
 The voucher artifact is transferred to the device by different means, and the device must verify the signature on it.
 This requires a trust anchor to be built-in to the device, and some kind of private PKI be maintained by the vendor (or it's authorized designate).
-{{?I-D.richardson-anima-masa-considerations}} provides some advice on choices in PKI design for a MASA.
+{{-masa-considerations}} provides some advice on choices in PKI design for a MASA.
 The taxonomy presented in this document applies to describing how this PKI has been designed.
 
 ## Onboarded network-local anchors
@@ -430,7 +434,7 @@ The taxonomy presented in this document applies to describing how this PKI has b
 {{RFC7030}}, {{RFC8995}} and {{?I-D.ietf-netconf-trust-anchors}} provide mechanisms by which new trust anchors may be loaded by a device during an onboarding process.
 The trust anchors involved are typically local to an enterprise and are used to validate connections to other devices in the network.
 This typically includes connections to network management systems that may also load or modify other trust anchors in the system.
-{{?I-D.richardson-anima-masa-considerations}} provides some advice in the BRSKI ({{RFC8995}}) case for appropriate PKI complexity for such local PKIs.
+{{-masa-considerations}} provides some advice in the BRSKI ({{RFC8995}}) case for appropriate PKI complexity for such local PKIs.
 
 # Types of Identities
 
@@ -449,7 +453,7 @@ The process of making this coordinated key pair and then installing it into the 
 
 A number of protocols depend upon this certificate.
 
-* {{RFC8572}} and {{-BRSKI}} introduce mechanisms for new devices (called pledges) to be onboarded into a network without intervention from an expert operator. A number of derived protocols such as {{I-D.ietf-anima-brski-async-enroll}}, {{I-D.ietf-anima-constrained-voucher}}, {{I-D.ietf-anima-brski-cloud}} extend this in a number of ways.
+* {{RFC8572}} and {{-BRSKI}} introduce mechanisms for new devices (called pledges) to be onboarded into a network without intervention from an expert operator. A number of derived protocols such as {{-async-enroll}}, {{-constrained-voucher}}, {{-cloud}} extend this in a number of ways.
 
 * {{RFC9334}} depends upon a key provisioned into the Attesting Environment to sign Evidence.
 
